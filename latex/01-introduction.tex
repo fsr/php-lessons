@@ -16,6 +16,7 @@
 \maketitle
 
 \begin{frame}{What's up today?}
+	\setbeamertemplate{section in toc}[sections numbered]
 	\tableofcontents
 \end{frame}
 
@@ -61,7 +62,7 @@
         \item Mailinglist \url{programmierung@ifsr.de}
         \item Cyberspace (wednesday 5./6. DS)
 		\item Material-Repository \\
-			\url{https://github.com/manniL/php-lessons}
+			\url{https://github.com/fsr/php-lessons}
 	\end{itemize}
 \end{frame}
 
@@ -128,9 +129,149 @@
 	
 	\pause
 	
-	Google \& Install it! The instructions are very straightforward
+	Google \& install it! The instructions are very straightforward
 	
 \end{frame}
+
+\begin{frame}{Installation \#{}3}
+
+	Let's check if you did it right!
+	
+	If not already done, enable the Apache component in your XAMPP control panel. \pause
+	
+	Now navigate to \url{http://localhost} or \url{127.0.0.1}.
+	
+	In case you see a welcome screen, you did it right!
+	
+	\textbf{Any problems?} \pause
+	
+	Alright, let's continue
+	
+\end{frame}
+
+
+\section{Programming Tools}
+
+\begin{frame}{Programming Tools}
+
+Now we setup our local environment, but there is one thing missing now.
+With which program we will we write our code? \pause
+	
+	\begin{itemize}
+		\item Word/LibreOffice \pause \textbf{NO!!!} \pause
+		\item Terminal \pause \textbf{Possible, but tedious} \pause
+		\item Notepad/Notepad++/Gedit \pause \textbf{Better.. but missing QoL\footnote{Quality of Life} features} \pause
+		\item PHPStorm/Eclipse/... \pause \textbf{That's it!} \pause
+	\end{itemize}
+	
+	We will use an IDE\footnote{Integrated Development Environment} later on!
+	For our first little program we will go with Notepad++, TextMate or gedit, depending on your OS.
+	
+\end{frame}
+
+\section{Let's get it on!}
+\begin{frame}[fragile]{Here we go, our first program \#{}1}
+
+For our first program, I will display the source code step by step here \pause
+
+If not already done, enable your XAMPP (Apache should be enough) \pause
+
+Change your directory to the "htdocs" directory of your XAMPP installation \pause
+
+Create a new file called \textit{index.php} \pause
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Here we go, our first program \#{}2}
+
+Add the following code:
+
+	\begin{lstlisting}
+<?php
+	
+?>
+	\end{lstlisting}
+	
+	\pause
+	These are the PHP (open and close) tags. Whenever you write PHP code, you need to insert them before or after the code. \pause
+	
+	\emph{BEWARE:} It's a good practise to ommit the closing tag when you write PHP only (whenever you do not insert PHP inside an HTML file eg.). We will remove the closing tag from now on in those cases.
+\end{frame}
+
+\begin{frame}[fragile]{Here we go, our first program \#{}3}
+
+After the opening tag our PHP code will be written. We are adding a \emph{Variable} here. Variables start with a dollar sign. \pause Now, we will assign the variable a value. In our case, it is your name. Words and senctences are called \emph{Strings} and are enclosed by single or double quotes.
+
+	\begin{lstlisting}
+<?php
+	$name = "YOURNAMEHERE"; 
+
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Here we go, our first program \#{}2}
+
+Now, we will print out a text with the name variable. Therefore we use \emph{echo}.
+We could echo out a little text with the variable, like: \pause
+
+	\begin{lstlisting}
+<?php
+	$name = "YOURNAMEHERE";
+	echo "Welcome" . $name;
+	\end{lstlisting}
+	\pause
+
+
+
+Let's open our file in the browser. Refresh the \url{http://localhost} page and you should see the text! \pause
+
+Congrats! You wrote your first program.
+
+\end{frame}
+
+
+\section{Code style}
+\begin{frame}[fragile]{Code Style - Some rules}
+
+Before digging deeper into PHP stuff, a word on your (developing) code style\pause
+
+\textbf{BE CONSISTENT!} \pause
+
+There are several ways to write (semantically equivalent) code. Find your style, and stick with it!\pause
+
+\textbf{INDENTS AND SPACES!} \pause
+
+Please don't forget to indent code in function blocks or methods (more about this later) and to add proper spaces, for example when assigning variables. \pause
+
+
+\textbf{SPEAKING IDENTIFIERS!} \pause
+
+Name your variables properly. "\$a", "\$foo" or "\$test1" say nothing about the content, while "\$name", "\$codeStyleConfigItem" or "\$wellKnownParameterThatIsUsedEverywhere" likely give hints on what the variables are used\pause
+\end{frame}
+
+
+\begin{frame}[fragile]{Code Style - Examples}
+
+A simple example:
+
+\begin{lstlisting}
+<?php
+	$name = "YOURNAMEHERE"; //Readable, Speaking Identifiers and proper spacing
+	$a='AnotherName'; // :(
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{The end of the first part}
+
+Hope you enjoyed our first lesson! \textbf{Any questions left?} \pause
+
+See you next week!
+
+\end{frame}
+
+
 
 
 \end{document}

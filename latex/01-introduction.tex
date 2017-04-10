@@ -1,0 +1,136 @@
+\input{slides_template}	
+\input{php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{What's up today?}
+	\tableofcontents
+\end{frame}
+
+\section{Before we dive in}
+
+\begin{frame}{Before we dive in}
+
+	Before we start, some questions for you:
+	\pause
+	\begin{itemize}
+        \item What do you expect from the course? 	\pause
+		\item Do you already have knowledge in programming?
+	\end{itemize}
+\end{frame}
+
+
+\section{Requirements and stuff}
+
+\begin{frame}{Requirements and stuff}
+	Requirements
+	
+	\begin{itemize}
+        \item A computer (obviously) 	\pause
+		\item A decent OS 	\pause
+		\item Knowledge in other programming languages will help 	\pause
+	\end{itemize}
+	Proceeding
+	
+	\begin{itemize}
+		\item There will be 14 lessons
+		\item Each covers a topic and comes with excercises
+	\end{itemize}
+\end{frame}
+
+\section{Resources}
+\begin{frame}{Some resources}
+	\begin{itemize}
+		\item You can ask your tutor (That's me :P)
+		\item Join the Auditorium group \hfill \\
+			\url{http://auditorium.inf.tu-dresden.de}
+		\item StackOverflow \hfill \\
+		\item Official documentation on \url{php.net/manual/} \pause
+        \item Mailinglist \url{programmierung@ifsr.de}
+        \item Cyberspace (wednesday 5./6. DS)
+		\item Material-Repository \\
+			\url{https://github.com/manniL/php-lessons}
+	\end{itemize}
+\end{frame}
+
+\section{What is PHP}
+\begin{frame}{PHP.. what?}
+	PHP...
+	\begin{itemize}
+		\item ...is a recursive acronym for PHP: Hypertext Preprocessor \pause
+		\item ...is a server-side language \pause
+		\item ...is widely-used \pause
+		\item ...is open source \pause
+		\item ...is a dynamic language \pause
+		\item ...isn't as strict as other languages like C/C++/Java
+	\end{itemize}
+\end{frame}
+
+\section{Pros and Cons}
+\begin{frame}{Now to the Pros and Cons}
+	Pros
+	\begin{itemize}
+		\item No need to compile \pause
+		\item No types must be set \pause
+		\item OOP is supported, but not mandatory \pause
+		\item Can be embedded in HTML code \pause
+		\item Cheap to set up \pause
+		\item Flexible in terms of Database \pause
+	\end{itemize}
+	
+	Cons
+	\begin{itemize}
+		\item Can get really messy when not properly used \pause
+		\item Partly bad language design \pause
+		\item Can be tedious to use without a proper framework \pause
+		\item Crap for developing Desktop applications (obviously) \pause
+	\end{itemize}
+	
+	But anyway, it's my server-side language of choice, and also the choice of many other people. And I hope it'll be yours too!
+\end{frame}
+
+\section{Installation}
+\begin{frame}{Installation \#{}1}
+	Manually installing PHP is easy on every UNIX system (Linux, MacOS), but can be very annoying on Windows machine. \pause
+	
+	That's why we won't install a XAMP(P)-stack manually! \pause
+	
+	XAMP?\pause
+	\begin{itemize}
+		\item X = Letter for the OS (Can be L for Linux, M for macOS or W for Windows) \pause
+		\item A for Apache (Server) \pause
+		\item M for MySQL/MariaDB (Database) \pause
+		\item P for PHP (obviously) \pause
+		\item another P for Perl (sometimes) \pause
+	\end{itemize}
+	
+	All contents can be swapped too (Apache for nginx, MySQL for Postgres, PHP for Python and so on..)
+\end{frame}
+
+\begin{frame}{Installation \#{}2}
+
+	That's the reason why we will use \textbf{XAMPP} \pause
+	\begin{figure}
+  		\includegraphics[width=\linewidth]{img/xampp.png}
+	\end{figure}
+	
+	\pause
+	
+	Google \& Install it! The instructions are very straightforward
+	
+\end{frame}
+
+
+\end{document}

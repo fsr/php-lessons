@@ -25,5 +25,5 @@ Also, add the information to the `_data/materials.yml` residing in the __gh-page
 
 
 
-These lessons are created and maintained by [@maniL](https://github.com/manniL).
+These lessons are created and maintained by [@manniL](https://github.com/manniL).
 

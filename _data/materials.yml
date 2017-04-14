@@ -1,0 +1,6 @@
+slides:
+  -
+    number: 1
+    name: Introduction
+    url: https://ifsr.de/kurs-materialien/php/01-introduction.pdf
+    published: True

@@ -1,8 +1,8 @@
-# Java Lesson Tasks
+# PHP Lesson Tasks
 
-This branch contains the tasks for the __Java Lessons__, held at the TU Dresden.
+This branch contains the tasks for the __PHP Lessons__, held at the TU Dresden.
 
-You can view them in a rendered version [here](http://fsr.github.io/java-lessons).
+You can view them in a rendered version [here](http://fsr.github.io/php-lessons).
 
 
 ## Contributing

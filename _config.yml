@@ -2,7 +2,7 @@
 title: PHP Lesson Exercises
 email: programmierung@ifsr.de
 description: >
-  Rendered exercise descriptions for the java lessons
+  Rendered exercise descriptions for the PHP lessons
 baseurl: "/php-lessons" # the subpath of your site, e.g. /blog/
 url: "http://fsr.github.io/" # the base hostname & protocol for your site
 github_username: fsr

@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-This site hosts the exercises for the fsr java lessons. Sources can be found on [GitHub](https://github.com/fsr/php-lessons/tree/gh-pages)
+This site hosts the exercises for the iFSR PHP lessons. Sources can be found on [GitHub](https://github.com/fsr/php-lessons/tree/gh-pages)
 
 
 Modules and concepts this course wants to teach:

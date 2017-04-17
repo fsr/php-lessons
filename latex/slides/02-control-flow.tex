@@ -149,8 +149,11 @@ $result = 14;
 $otherNumber = 7;
 
 //Calculation shorthands
-$result += $otherNumber //Same as $result = $result + $otherNumber
+$result += $otherNumber; //Same as $result = $result + $otherNumber
 //Works with all arithmetic operators the same way 
+
+$otherNumber++; //short for $otherNumber += 1
+$otherNumber--; //short for $otherNumber -= 1
 
 //Concatenation
 $fullname = "Alex";
@@ -288,9 +291,127 @@ But for the families "Fischer", "Neumann" and "Haustein" only \emph{5} eggs. All
 (Because we hadn't talked about how to use input forms yet, assume that you use a variable as input) 
 \end{frame}
 
-\section{Switch}
-\section{Arrays}
+\section{Switch/Case}
+
+\begin{frame}[fragile]{Control Flow - Switch/Case}
+
+Because we do not want to end up with code like this:
+\begin{lstlisting}
+<?php
+$number = 3; //random number here
+
+if($number == 1){
+	//Do sth.
+} else if($number == 2) {
+    //Do sth. else 
+} else if($number == 3) {
+    //Do sth. else again
+} else if($number == 4) {
+    .....
+} else {
+    //Something else again...
+}
+\end{lstlisting} 
+\pause
+
+we will use something called "Switch/Case". It's basically like ITE, but focused on one variable (the "switch")
+
+\end{frame}
+
+\begin{frame}[fragile]{Control Flow - Switch/Case}
+
+Let's refactor our code from above
+\begin{lstlisting}
+<?php
+$randomNumber = 3; //random number here
+switch($randomNumber){
+	case 1: {
+		//Do sth. here
+		break;
+	}
+	case 2:
+	case 3: {
+		//Do the same thing in case the var is 2 or 4
+		break;
+	}
+	case 5: {
+		//Do sth. else again
+		break;
+	}
+	default: {
+		//When no case matches
+		break;
+	}
+}
+\end{lstlisting} 
+\pause
+
+Looks much cleaner, doesn't it?
+
+\end{frame}
+
 \section{Loops}
+
+\begin{frame}[fragile]{Loops}
+
+Imagine that we wan't to output the same string 5 times.. \pause
+
+\begin{lstlisting}
+<?php
+$ouput = "LOL";
+
+//Echo 5x
+echo $output;
+echo $output;
+echo $output;
+echo $output;
+echo $output;
+\end{lstlisting} 
+\pause
+
+But.. that should be easier, shouldn't it?
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Loops - While loop}
+
+I want to introduce the first loop type: The \textbf{while loop}.
+It will execute the code in the body while the condition argument is true  \pause
+
+\begin{lstlisting}
+<?php
+$ouput = "LOL";
+
+$count = 0;
+while($count <= 5){
+	echo $output;
+	$count++; //Short form for $count +=1
+}
+\end{lstlisting} 
+
+\end{frame}
+
+\begin{frame}[fragile]{Loops - For loop}
+
+But there is another type of loop that fits a bit more in this case: The \textbf{for loop}.
+It is a bit more complicated than the while loop, but intuitive anyway\pause
+
+\begin{lstlisting}
+<?php
+$ouput = "LOL";
+
+for($count = 0; $count <= 5; $count++){
+	echo $output;
+}
+\end{lstlisting} \pause
+
+Can you see the similarities to the while loop?
+
+It's basically the same, but with the variable initialization in the loop itself.
+\end{frame}
+
+\section{Arrays}
 \section{Functions}
 
 \end{document}

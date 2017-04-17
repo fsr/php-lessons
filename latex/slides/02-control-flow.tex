@@ -1,0 +1,296 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 2 - Control Flow
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Data Types}
+
+\begin{frame}[fragile]{Data types}
+
+	Though PHP does not require explicit type declaration, it evaluates the type of a variable based on it's content: \pause
+	\begin{lstlisting}
+<?php
+$name = "Heinz"; //String
+$answer = 42; //Integer
+$pi = 3.14159265359; //Float/Double
+$isTrumpAGoodPresident = false; //Boolean
+$goodFirstNames = ["Jakob","Markus"]; //Array
+$currentDate = new DateTime(); //Object
+$whyIsThisNull = null; //NULL
+$file = fopen("info.txt"); //Resource
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Type casting}
+
+	Type casting works much as it does in other high-level languages like Java or C++\pause
+	\begin{lstlisting}
+<?php
+$answer = 42; //Integer
+$isThisTheRealAnswer = (boolean) $answer; 
+var_dump($isThisTheRealAnswer); //prints true
+	\end{lstlisting}
+	\pause
+	
+	\textbf{HINT:} The \emph{var\_{}dump(\$variable)} function is used to print out the value(s) of a variable. It is very useful for debugging ;)
+
+\end{frame}
+
+\begin{frame}[fragile]{Type juggling}
+
+	It will become a bit weird now. PHP automatically \emph{converts} variable types, \emph{based on the operations performed on them}.\pause
+	\begin{lstlisting}
+<?php
+$foo = "0";  // $foo is currently a string, respresenting the char "0"
+$foo = $foo + 2;   // $foo is now an integer with the value 2
+$foo = $foo + 1.3;  // $foo is now a float (3.3)
+$foo = 5 + "10 Little Piggies"; // $foo is an integer (15)
+?>
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Constants}
+
+There are also constants in PHP! These are declared by using the \emph{define()} function and are globally accessible: \pause
+
+\begin{lstlisting}
+<?php
+define("GREETING", "Hello students!");
+echo GREETING;
+\end{lstlisting}
+\pause
+
+Constants can also be case-insensitive: \pause
+\begin{lstlisting}
+<?php
+define("goodbye", "See you again students!", true);
+echo GooDbYE;
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{String parsing}
+
+There are some minor differences between double and single-quote strings: \pause
+
+\begin{lstlisting}
+
+<?php
+$type = "cookie";
+
+//This will evaluate the $type variable and print out the "correct" string
+echo "He drank some coffee with $type syrup";
+//While this echo will not, because variables are not evaluated in single-quote strings
+echo 'He drank some coffee with $type syrup';
+
+//Invalid, because the variables name is "type" and not types.. What now?
+echo "But the syrup was not made out of $types";
+
+//You can specify the end of the variable name by enclosing it in braces:
+echo "But the syrup was not made out of ${type}s";
+\end{lstlisting}
+
+\end{frame}
+
+\section{Operators}
+
+\begin{frame}[fragile]{Arithmetic Operators}
+
+While PHP has a lot of operators, let's cover the arithmetic ones first \pause
+
+\begin{lstlisting}
+<?php
+$a = 14;
+$b = 7;
+
+//Calculation
+$addition = $a + $b;
+$subtraction = $a - $b;
+$multiplication = $a * $b;
+$division = $a / $b;
+$modulus = $a % $b;
+$exponentiation = $a ** $b; //Since 5.6
+
+//Concatenation
+$first = "Alex";
+$last = "Lichter";
+$fullname = $first . " " . $last;
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Assignment Operators}
+
+PHP also delivers some shortcuts to assign variables (similar to other languages):\pause
+
+\begin{lstlisting}
+<?php
+$result = 14;
+$otherNumber = 7;
+
+//Calculation shorthands
+$result += $otherNumber //Same as $result = $result + $otherNumber
+//Works with all arithmetic operators the same way 
+
+//Concatenation
+$fullname = "Alex";
+$fullname .= " Lichter";
+//Same pattern as above
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Comparison Operators}
+
+For the control flow of a program, we need to compare variables:\pause
+\begin{lstlisting}
+<?php
+$foo = "0"; $bar = 0;
+
+//Equal
+var_dump($foo == $bar); //true -> Equal value (though it's not the same type)
+var_dump($foo == false); //true -> Same as above
+//Not equal
+var_dump($foo != $bar); //false
+
+//Identical
+var_dump($foo === $bar); //false -> Equal value, but not the same type
+//Not identical
+var_dump($foo !== $bar); //true
+
+var_dump(1 >= 1); //true
+var_dump(2 < 3); //true
+//The typical greater/less than operators are available 
+//>=, >, <, <=
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Logical Operators}
+
+We can combine booleans by using logical operators\pause
+\begin{lstlisting}
+<?php
+$a = false; $b = true;
+
+//OR (non-exclusive)
+var_dump($a || $b); //true -> at least one statement is true
+var_dump($a or $b);
+var_dump($a || $a); //false
+
+//XOR
+var_dump($b XOR $b); //false -> exclusive or (At least one, but not both)
+
+//AND
+var_dump($a && $b); //false -> only true when both values are true
+var_dump($a && true); //true
+
+//NOT
+var_dump(!$a); //true
+\end{lstlisting}
+
+\end{frame}
+
+\section{If/Else}
+\begin{frame}[fragile]{Control Flow - ITE \#{}1}
+
+Before you get your first task today, let's talk about conditions and ITE.\pause
+
+ITE means \textbf{I}f \textbf{T}hen \textbf{E}lse and is necessary for structuring your program. A little example here: \pause
+\begin{lstlisting}
+<?php
+$hour = date("H"); //Returns the current hour
+
+if($hour < 18){
+	echo "Good day ladies and gentlemen!";
+}
+\end{lstlisting} 
+\pause
+
+What does that little script do? \pause
+
+Exactly! The script evaluates if the current hour is less than 18, and prints out the sentence if the condition is met!
+
+\end{frame}
+
+\begin{frame}[fragile]{Control Flow - ITE \#{}2}
+
+But we should also print something out when it's evening, right?
+How would we do that? \pause
+\begin{lstlisting}
+<?php
+$hour = date("H"); //Returns the current hour
+
+if($hour < 18){
+	echo "Good day ladies and gentlemen!";
+} else {
+    echo "Good evening ladies and gentlement!";
+}
+\end{lstlisting} 
+\pause
+
+Yup! This is how if then else works.
+
+\end{frame}
+
+\begin{frame}[fragile]{Control Flow - ITE \#{}3}
+
+And.. what should we do when we wan't to print out something when the hour is equal to 20? \pause
+\begin{lstlisting}
+<?php
+$hour = date("H"); //Returns the current hour
+
+if($hour < 18){
+	echo "Good day ladies and gentlemen!";
+} else if($hour == 20) {
+    echo "Primetime is starting soon!";
+} else {
+    echo "Good evening ladies and gentlement!";
+}
+\end{lstlisting} 
+\pause
+
+Now, the script will grab the current hours and go through all conditions. When one of them is true, the code inside it will be executed and no other conditions will be verified.
+\end{frame}
+
+\begin{frame}[fragile]{Control Flow - ITE \#{}4 - Your task}
+
+Alright! Now you get your first little excercise to accomplish. \pause
+
+The easter bunny went through a lot of gardens to hide \emph{precious eggs} a few days ago! There were so many gardens that he used a script that told him \emph{how many eggs} he should hide in each garden. Glad that \textbf{you} wrote him a great PHP script!
+
+For the families "Müller", "Härtel" and "Lehner", there were \emph{12} eggs to hide. 
+
+For the "Baumann", "Noack" and "Bodirsky" families, there were even \emph{17} eggs to hide.
+
+But for the families "Fischer", "Neumann" and "Haustein" only \emph{5} eggs. All other families had the same number of eggs: \emph{7}
+
+(Because we hadn't talked about how to use input forms yet, assume that you use a variable as input) 
+\end{frame}
+
+\section{Switch}
+\section{Arrays}
+\section{Loops}
+\section{Functions}
+
+\end{document}

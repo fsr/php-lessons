@@ -411,7 +411,138 @@ Can you see the similarities to the while loop?
 It's basically the same, but with the variable initialization in the loop itself.
 \end{frame}
 
+\begin{frame}[fragile]{Loops - The next task}
+
+Another task for you:
+
+The easter bunny forgot to visit Egypt! And it came even worse. He don't know how a pyramid looks like! Please, write him a script that outputs a well-aligned pyramid out of a character of your choice! \pause
+
+\textbf{HINT:} Wrap your pyramid code in "<pre>" HTML tags, so the spaces will be rendered correctly!
+
+\end{frame}
+
 \section{Arrays}
-\section{Functions}
+
+\begin{frame}[fragile]{Arrays}
+
+Our last topic for today is called "Arrays". But what are arrays? \pause
+Arrays are special variables that hold multiple values at once!
+
+Imagine you have a list of cars.
+\begin{lstlisting}
+<?php
+$car1 = "VW";
+$car2 = "BMW";
+$car3 = "Porsche";
+//and so on..
+\end{lstlisting} \pause
+
+That doesn't look good! How could you loop through the car list now.. And imagine all the car types in one list... \pause
+
+The solution is an \textbf{array}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Arrays}
+
+\begin{lstlisting}
+<?php
+$cars = array("VW", "BMW", "Porsche");
+//Or the shorthand:
+$cars = ["VW", "BMW", "Porsche"];
+\end{lstlisting} \pause
+Great! Now you need to access the variables stored in the array somehow.. \pause
+
+\begin{lstlisting}
+<?php
+$cars = ["VW", "BMW", "Porsche"];
+echo "My car is a " . $cars[2]; //Outputs "My car is a porsche"
+\end{lstlisting} \pause
+
+You access the variables by using its index (starting with 0).
+
+\end{frame}
+
+\begin{frame}[fragile]{Arrays}
+
+There is also a way to count all elements of an array: \pause
+
+\begin{lstlisting}
+<?php
+$cars = ["VW", "BMW", "Porsche"];
+echo count($cars);
+\end{lstlisting} \pause
+
+To loop through an array, you could use the count and a for loop, as you have learned: \pause
+
+\begin{lstlisting}
+<?php
+$cars = ["VW", "BMW", "Porsche"];
+for($x = 0; $x < count($cars); $x++) {
+    echo $cars[$x]. "\n";
+}
+\end{lstlisting} \pause
+
+\end{frame}
+
+\begin{frame}[fragile]{Arrays - Foreach loop}
+
+But as you might already guessed, there is a shorter way for it! The \textbf{foreach loop} \pause
+
+\begin{lstlisting}
+<?php
+$cars = ["VW", "BMW", "Porsche"];
+foreach($cars as $carName) {
+    echo "$carName\n";
+}
+\end{lstlisting} \pause
+
+The loop iterates over all array elements! You can even do something with the indexes: \pause
+
+\begin{lstlisting}
+<?php
+$cars = ["VW", "BMW", "Porsche"];
+foreach($cars as $index => $carName) {
+    echo "Position: $index | Car name: $carName\n";
+}
+\end{lstlisting} \pause
+
+\end{frame}
+
+\begin{frame}[fragile]{Associative Arrays}
+
+Arrays don't need to have numeric indexes though. Those who have numeric indexes are called \emph{Indexed Arrays}, but there are also \emph{Associative Arrays}\pause
+
+As the name already hints, they associate any index with an assigned value:
+\begin{lstlisting}
+<?php
+$ages = []; //empty array
+$ages["Alex"] = 20;
+$ages["Peter"] = 9;
+$ages["Inge"] = 86;
+foreach($ages as $name => $age) {
+    echo "$name ist $age Jahre alt\n";
+}
+\end{lstlisting} \pause
+
+\end{frame}
+
+\begin{frame}[fragile]{Arrays - Your final task}
+
+As your final task for today, you should partly refactor the programs you already wrote before! \pause
+
+Make a list (or many, as you wish) with all families that received a special number of eggs in Task \#{}1.\pause There are 48 more families that the easter bunny visited while carrying the same bag of eggs. \pause
+
+Calculate how many eggs the easter bunny needs to put in his bag before visiting all families (including the "special" ones). \pause
+
+Also, use knowledge from all sections from today, if possible or needed. \pause
+
+\emph{BONUS:} Bring up some statistics about the egg distribution. ;)
+
+\textbf{Good luck!}
+
+\end{frame}
+
 
 \end{document}

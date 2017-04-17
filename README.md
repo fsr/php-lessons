@@ -7,7 +7,7 @@ Exercises to go along with the courses can be found [on GitHub pages](http://fsr
 
 ### Teaching
 
-The `tex` files are automatically rendered and can be found (SOON) at:
+The `tex` files are automatically rendered and can be found at:
 [http://fsr.github.io/php-lessons/materials.html](http://fsr.github.io/php-lessons/materials.html)
 
 Almost every task is linked to a lesson. The corresponding PDF is linked automatically at the beginning of every task.

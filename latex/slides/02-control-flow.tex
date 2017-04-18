@@ -358,7 +358,7 @@ Imagine that we want to output the same string 5 times.. \pause
 
 \begin{lstlisting}
 <?php
-$ouput = "LOL";
+$output = "LOL";
 
 //Echo 5x
 echo $output;
@@ -431,10 +431,10 @@ Or to ignore some loop steps \pause
 <?php
 
 for($count = 0; $count <= 5; $count++){
-	echo "Hey!";
 	if($count == 3){
-		continue; //Ignores the output of this step
+		continue; //Ignores all code below
 	}
+	echo "Hey!";
 }
 \end{lstlisting} \pause
 

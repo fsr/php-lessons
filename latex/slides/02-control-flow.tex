@@ -258,7 +258,7 @@ Yup! This is how if then else works.
 
 \begin{frame}[fragile]{Control Flow - ITE \#{}3}
 
-And.. what should we do when we wan't to print out something when the hour is equal to 20? \pause
+And.. what should we do when we want to print out something when the hour is equal to 20? \pause
 \begin{lstlisting}
 <?php
 $hour = date("H"); //Returns the current hour
@@ -354,7 +354,7 @@ Looks much cleaner, doesn't it?
 
 \begin{frame}[fragile]{Loops}
 
-Imagine that we wan't to output the same string 5 times.. \pause
+Imagine that we want to output the same string 5 times.. \pause
 
 \begin{lstlisting}
 <?php
@@ -411,13 +411,42 @@ Can you see the similarities to the while loop?
 It's basically the same, but with the variable initialization in the loop itself.
 \end{frame}
 
+\begin{frame}[fragile]{Loops - Break and continue}
+
+Of course there are ways to stop a loop\pause
+
+\begin{lstlisting}
+<?php
+for($count = 0; $count <= 5; $count++){
+	echo "Hey";
+	if($count == 3){
+		break; //Stops the loop
+	}
+}
+\end{lstlisting} \pause
+
+Or to ignore some loop steps \pause
+
+\begin{lstlisting}
+<?php
+
+for($count = 0; $count <= 5; $count++){
+	echo "Hey!";
+	if($count == 3){
+		continue; //Ignores the output of this step
+	}
+}
+\end{lstlisting} \pause
+
+\end{frame}
+
 \begin{frame}[fragile]{Loops - The next task}
 
 Another task for you:
 
 The easter bunny forgot to visit Egypt! And it came even worse. He don't know how a pyramid looks like! Please, write him a script that outputs a well-aligned pyramid out of a character of your choice! \pause
 
-\textbf{HINT:} Wrap your pyramid code in "<pre>" HTML tags, so the spaces will be rendered correctly!
+\textbf{HINT:} Wrap your pyramid code in "\textless{}pre\textgreater{}" HTML tags, so the spaces will be rendered correctly!
 
 \end{frame}
 
@@ -457,7 +486,7 @@ Great! Now you need to access the variables stored in the array somehow.. \pause
 \begin{lstlisting}
 <?php
 $cars = ["VW", "BMW", "Porsche"];
-echo "My car is a " . $cars[2]; //Outputs "My car is a porsche"
+echo "My car is a " . $cars[2]; //Outputs "My car is a Porsche"
 \end{lstlisting} \pause
 
 You access the variables by using its index (starting with 0).

@@ -66,8 +66,26 @@ Superglobals are variables that are accessible regardsless of the scope. They ar
 		\item \textbf{\$\_{}SESSION} stores user-based data (e.g. when they log in)
 		\pause
 		\item \textbf{\$\_{}ENV} is responsible for all environment variables
-		
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Superglobals - Example}
+
+	Assuming you call the following script with the parameters 
+	
+	\texttt{?name=Alex\&{}age=20\&{}lesson=3}
+	
+	\begin{lstlisting}
+<?php
+	echo "Name: " . $_GET['name'] . "<br>";
+	echo "Age: " . $_REQUEST['age'] . "<br>";
+	//Would not work because the HTTP method is GET
+	//echo "Lesson: " . $_POST['lesson'] . "<br>";
+	echo "Lesson: " . $_GET['lesson'] . "<br>";
+	echo "Script name: " . $_SERVER['PHP_SELF'] . "<br>";
+	\end{lstlisting}
+	
+	It will print out the values from the query string and the filename of the executing script (through \texttt{\$\_{}SERVER['PHP\_{}SELF']}). 
 \end{frame}
 
 \section{Form Handling}

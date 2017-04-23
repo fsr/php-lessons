@@ -6,7 +6,8 @@
             "command": "pdflatex",
             "files": [
                 "01-introduction.tex",
-                "02-control-flow.tex"
+                "02-control-flow.tex",
+                "03-processing-forms.tex"              
             ]
         }
     }

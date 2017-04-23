@@ -26,7 +26,7 @@
 
 \begin{frame}{A short recap}
 
-	Well.. essentially we learned most of the basic control structures and can write somewhat mighty programs.\pause But these are not dynamic enough at the moment, because we cannot process user input yet! That's what we want to change in this lesson.
+	Well.. essentially we learned most of the basic control structures and can write somewhat mighty programs. \pause But these are not dynamic enough at the moment, because we cannot process user input yet! That's what we want to change in this lesson.
 \end{frame}
 
 \section{Security notice}
@@ -40,12 +40,57 @@
 \section{Understanding of HTTP Requests}
 
 \begin{frame}{HTTP - The protocol of the internet}
-\end{frame}
 
-\begin{frame}{HTTP Method overview}
+	HTTP (short for \textbf{H}yper\textbf{t}ext \textbf{T}ransport \textbf{Protocol}) is used for communicating between a client and the server.\pause
+	 
+	It is a request-response protocol:
+	By entering an URL in your browser, your browser perfoms a \emph{GET} request to the server and displays the response, which can be HTML, a file (which you can download) or anything else. The response also contains a status code (200 means OK for example, you all know some more I guess). \pause You can add to your request body data by using a \emph{POST} request. 
+	
+	There are some more methods than just GET and POST, but we will cover those in a later lesson.
 \end{frame}
 
 \begin{frame}{GET vs POST}
+	Well, let's compare \textbf{GET} and \textbf{POST} now, so we can evaluate when we use each method. PHP let us choose between those two when sending a form. The \emph{default method} is GET by the way \pause
+	\begin{center}
+	
+		\begin{tabular}{m{2.5cm} | m{3cm} | m{3cm}}
+		Attribute & GET & POST \\
+		\hline \pause
+		Visibility & \pause Yes, query string in URL & No, query string only in Request body \\
+		\hline \pause
+		Bookmarked & \pause Yes, bookmaring is possible & Not possible \\
+		\hline \pause
+		Browser History & \pause Creates browser history entry & No history entries \\
+		\hline \pause
+		Cache & \pause Cacheable & Not cacheable \\
+		\hline \pause
+		Length & \pause Limited & Unlimited\\
+		\hline \pause
+		Reload/Back button & \pause Nothing special & Resend alert \\
+		\end{tabular}
+	
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{GET vs POST}
+	
+	Alright, now you know what is the difference. So to put it in a nutshell, let's list the use cases.: \pause
+	
+	GET \pause
+	\begin{itemize}
+	\item Filtering \pause
+	\item Searching \pause
+	\item Redirect through forms \pause
+	\end{itemize}	
+	
+	POST \pause
+	\begin{itemize}
+	\item Sending data that should not appear in the URL (sensitive data like passwords eg.) \pause
+	\item Actually all other use cases :D
+	\end{itemize}
+	
+	
 \end{frame}
 
 \section{PHP Superglobals}

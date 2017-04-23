@@ -1,0 +1,78 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 3 - Processing forms
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{A short recap}
+
+	Well.. essentially we learned most of the basic control structures and can write somewhat mighty programs.\pause But these are not dynamic enough at the moment, because we cannot process user input yet! That's what we want to change in this lesson.
+\end{frame}
+
+\section{Security notice}
+
+\begin{frame}{Security notice}
+
+	As you've seen in the content overview, our last chapter is Input Validation and Security. \textbf{All code examples before} this chapter lack on security and validation methods. \pause 
+	Please, \textbf{do not} use them in production, otherwise you open the box of pandora for your (live) website!
+\end{frame}
+
+\section{Understanding of HTTP Requests}
+
+\begin{frame}{HTTP - The protocol of the internet}
+\end{frame}
+
+\begin{frame}{HTTP Method overview}
+\end{frame}
+
+\begin{frame}{GET vs POST}
+\end{frame}
+
+\section{PHP Superglobals}
+
+\begin{frame}[fragile]{Superglobals}
+Superglobals are variables that are accessible regardsless of the scope. They are automatically set by PHP itself. You can alter them though!
+	\pause
+	
+	\begin{itemize}
+        \item \textbf{\$\_{}SERVER} holds all information about the request headers, script location and similar	
+        \pause
+		\item \textbf{\$\_{}POST} and \textbf{\$\_{}GET} hold the corresponding data sent by the request
+		\pause
+		\item \textbf{\$\_{}COOKIE} has the cookie data of the request
+		\pause
+		\item \textbf{\$\_{}REQUEST} holds all data of \$\_{}POST, \$\_{}GET and \$\_{}COOKIE
+		\pause
+		\item \textbf{\$\_{}SESSION} stores user-based data (e.g. when they log in)
+		\pause
+		\item \textbf{\$\_{}ENV} is responsible for all environment variables
+		
+	\end{itemize}
+\end{frame}
+
+\section{Form Handling}
+
+\section{Input Validation and Security}
+
+
+\end{document}

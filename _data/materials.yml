@@ -9,3 +9,8 @@ slides:
     name: Control Flow
     url: https://ifsr.de/kurs-materialien/php/02-control-flow.pdf
     published: True
+  -
+    number: 3
+    name: Processing Forms
+    url: https://ifsr.de/kurs-materialien/php/03-processing-forms.pdf
+    published: True

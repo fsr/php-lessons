@@ -37,6 +37,56 @@
 	Please, \textbf{do not} use them in production, otherwise you open the box of pandora for your (live) website!
 \end{frame}
 
+\section{Functions}
+
+\begin{frame}[fragile]{Functions}
+
+	Before diving into forms, we need to learn another important control structure to stop repeating our codes and make it easier, shorter and better! \pause  \textbf{Functions!} \pause
+	
+	\begin{lstlisting}
+<?php
+function outputGreeting($name){
+	echo "Hey $name";
+}
+outPutGreeting("Peter"); //Call the function
+	\end{lstlisting} \pause
+	
+	Each function has a name after the function keyword, 0 to n arguments, a function body (that is executed when the function is called) and sometimes a return value
+	
+\end{frame}
+
+\begin{frame}[fragile]{Functions with return value}
+
+	To structure your code, it's worth it to create function for repetitive tasks\pause
+	
+	\begin{lstlisting}
+<?php
+function sum($x, $y){
+	return $x + $y;
+}
+echo "9 + 5 = ".sum(9,5)."<br>";
+echo "189 + 25 = ".sum(189,25);
+	\end{lstlisting} \pause
+	
+	Keep that in mind!
+	
+\end{frame}
+
+\begin{frame}[fragile]{Functions with default values}
+
+	Arguments/Parameters can also have default values! \pause
+	
+	\begin{lstlisting}
+<?php
+function setType($name, $type = "Student"){
+	echo "$name is currently a $type";
+}
+setType("Norbert");
+setType("Klaus","Teacher");
+	\end{lstlisting} \pause
+	
+\end{frame}
+
 \section{Understanding of HTTP Requests}
 
 \begin{frame}{HTTP - The protocol of the internet}
@@ -135,7 +185,146 @@ Superglobals are variables that are accessible regardsless of the scope. They ar
 
 \section{Form Handling}
 
+\begin{frame}[fragile]{Our first form}
+
+	Now we will write our first script that handles form user input. First of all, we need.. a form! \pause
+	
+	\begin{lstlisting}
+ <html>
+<body>
+
+<form action="welcome.php" method="post">
+Your name: <input type="text" name="name"><br>
+Your e-mail: <input type="text" name="email"><br>
+<input type="submit">
+</form>
+
+</body>
+</html> 
+	\end{lstlisting}
+	\pause
+	
+	As you see, there is no PHP code included yet. It is a simple form that uses the POST method to send name and e-mail. It will redirect to \emph{welcome.php}, because that is the value of the action parameter
+\end{frame}
+
+\begin{frame}[fragile]{Our first form}
+
+	If we submit the form now.. it will most likely throw a 404 error, because our PHP script does not exist yet. Well, you know how to use superglobals, so write your own \textbf{welcome.php} that does something with the form data! \pause
+	
+	\begin{lstlisting}
+<html>
+<body>
+
+Welcome <?= $_POST["name"]; ?><br>
+Your e-mail is: <?= $_POST["email"]; ?>
+
+</body>
+</html> 
+	\end{lstlisting}
+	\pause
+	
+	As you see, I am using other PHP open/close tags here. You can use them like this when you want to echo/print something. It's pretty nice for "one-liners" ;)
+\end{frame}
+
+\begin{frame}[fragile]{Form evaluation in the same script}
+
+	There is also a way to evaluate the form input on the same page. \pause
+	First of all, you need to set the action to the script it\textbf{self}. How you can do that? \pause
+	
+	\begin{lstlisting}
+<html>
+<body>
+
+<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+Your name: <input type="text" name="name"><br>
+Your e-mail: <input type="text" name="email"><br>
+<input type="submit">
+</form>
+
+</body>
+</html> 
+	\end{lstlisting}
+	\pause
+	
+	And now you need to differ if the form was sent yet or not....
+\end{frame}
+
+\begin{frame}[fragile]{Form evaluation in the same script}
+
+	You can do that by creating a condition on the HTTP request method \pause
+	
+	\begin{lstlisting}
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	//Evaluate form here
+} else {
+
+	//Show form here
+}
+	\end{lstlisting}
+	\pause
+	
+	It's your turn again! Refactor your welcome.php and merge it in the same script you use to display the form
+\end{frame}
+
 \section{Input Validation and Security}
+
+
+\begin{frame}[fragile]{Form Security - PHP\_{}SELF}
+
+	The most important topic on form handling is \textbf{Security}. \pause
+	We will start with the \texttt{\$\_{}SERVER["PHP\_{}SELF"] } variable, which can be abused easily when not properly secured. \pause
+	
+	\textbf{DEMO} \pause
+	
+	How to fix this: \pause
+	\begin{lstlisting}
+ <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	\end{lstlisting}
+	\pause
+	
+	htmlspecialchars "escapes" the whole string. It makes all html entities harmless without removing characters.
+	
+
+\end{frame}
+
+\begin{frame}[fragile]{Form Security - Sanitize input}
+
+	Now we need to sanitize our input. Imagine someone submits HTML code as his "email". When we display the code without sanitizing, it could be abused. \pause
+
+	\begin{lstlisting}
+<?php
+function sanitizeInput($data){
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+	\end{lstlisting}
+	\pause
+	
+	\begin{itemize}
+	\item \emph{trim} removes whitespaces before and after the data \pause
+	\item \emph{stripslashes} removes all slashes as the function says \pause
+	\end{itemize}
+	
+	It is important to sanitize \textbf{all of your input}!
+
+\end{frame}
+
+\begin{frame}[fragile]{Form Security - Your task}
+
+	Alright. You final task this week: Create a little calculator that takes two numbers and calculates all basic results by using forms! \pause
+	
+	\textbf{HINTS:}
+	\begin{itemize}
+	\item Use radio buttons for the arithmetic methods (+, -, *, /, \%, **) \pause
+	\item Think about error handling. What could go wrong? \pause
+	\item Sanitize \textbf{your input}!
+	\end{itemize}
+
+\end{frame}
 
 
 \end{document}

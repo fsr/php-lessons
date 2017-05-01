@@ -2,3 +2,7 @@ targets:
     - Setup PHP
     - Basic structures
     - Form Handling
+    - Input Sanitizing and Validation
+    - Object Oriented Programming Basics
+    - Method Chaining
+    - Include/Require

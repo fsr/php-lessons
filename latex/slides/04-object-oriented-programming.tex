@@ -1,0 +1,315 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 4 - Object Oriented Programming
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{A short recap (again)}
+	Last lesson we learned a lot about form handling, sanitizing, validating input and about the HTTP protocol. \pause
+
+	A note on form validation itself: What we did was only \textbf{server-side} validation. You can do a \textbf{client-side} form validation with HTML5 and JS, but that's not part of this course.	\pause
+	
+	We now can handle user input and are almost ready to build huge applications. But when we have a lot of code (30k+ Lines of Code), we should structure it well. We will learn how to program \textbf{object oriented} therefore!
+\end{frame}
+
+\section{Why OOP?}
+
+\begin{frame}{Why we need OOP}
+	As you may know from the SWT lecture, OOP is mainly used while programming high-level-languages (exceptions are there [Haskell]). Your future code should be:\pause
+	\begin{itemize}
+	\item Well-structured \pause
+	\item Without duplicates [DRY] \pause
+	\item Flexible, maintainable and changeable with ease \pause
+	\item Modularized \pause
+	\end{itemize}
+	
+And \textbf{OOP} gives us all those points when used correctly.
+\end{frame}
+
+\section{Git gud - PHPStorm}
+\begin{frame}{Why we need OOP}
+	In the next weeks we will develop more and more complex programs. \pause To have some QoL features on your side (Autocomplete, Error hinting and more), you should get yourself an IDE. I already mentioned that in the 1st lesson. \pause My IDE of choice is PHPStorm
+	\\\includegraphics[width=3cm]{img/phpstorm.png}\\
+	You can get a free copy with your TU Dresden mail on \url{https://www.jetbrains.com/student/}. Download it now and we will set the IDE up together!
+\end{frame}
+
+\section{Include and Require}
+\begin{frame}[fragile]{Include/Require}
+	To structure your PHP code even better, you can (and should!) put it in different files. There are two methods to include these files in your "main" file, called \texttt{include} and \texttt{require}.
+	
+Imagine you want to welcome every user when the opens a page of your website. You'd declare a welcome function/text in the welcome.php and can include it on every page like that: \pause
+	\begin{lstlisting}
+	<?php
+	include 'relate/path/to/welcome.php';
+	//include 'welcome.php'; when in same folder
+	//Page content here
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Include/Require - Difference and once}
+When the file you want to include couldn't be found, \texttt{include} will throw a warning (but the script continues working. \texttt{Require} would throw a \textbf{fatal error} instead, making the script halt instantly. This is the only differnce \pause
+
+That means, \texttt{require} should be used for critical/important files. \pause
+
+There are also two methods called \texttt{include\_{}once} and \texttt{require\_{}once}. They work like include/require but only include a file once. When it should be included again, the methods won't do that. That's good for including functions/modularized code, but bad for templating.
+\end{frame}
+
+\section{Classes and objects}
+
+\begin{frame}{Classes and objects - theory}
+	Before we go deeper into the pratical OOP part, let's talk about some terms everyone of you should know: \textbf{Classes} and \textbf{Objects}. \pause
+	
+	To avoid complex explanations and abstractions, here is a simple explanation for both terms: \pause
+	
+	You can imagine a class as a \emph{blueprint}, for \emph{a house} for example. It defines the structure, the shape, hold relationships between the parts (for example that the living room is connected to the bath) and is defined, even when the house isn't built up. \pause
+	An object can be understood as the \emph{real house} then! It stores all the "data" that is needed for the house, like the floor type or the wall colors. \pause
+\end{frame}
+
+\begin{frame}{Classes and objects - questions}
+	Now some questions for \textbf{you}. In case you don't understand something or anything seems not logical, do not hesitate to tell it!
+	
+	\begin{enumerate}
+	\item Can an object exist without a class? \pause \textbf{No!}
+	\item Can a class exist without an object? \pause \textbf{Yes, that works!}
+	\item Can there be more than one object of a specific class? \pause \textbf{Yup, that's no problem!}
+	\item Can an object have multiple classes? \pause \textbf{Nope, that's not possible like this.}  The only way is \textbf{Inheritance}, but more about it later
+	\end{enumerate} \pause
+	
+	Alright, I think you catched the drift!
+	
+\end{frame}
+
+\begin{frame}[fragile]{Classes and objects - basic class}
+	So, how does classes and objects look in PHP: \pause
+	\begin{lstlisting}
+<?php
+ 
+class House
+{
+  public $rooms = 4;
+  public $street = "Am Kleinen Anger 13";
+}
+ 
+$obj = new House;
+
+echo "<pre>";
+var_dump($obj);
+echo "<br>";
+echo $obj->rooms; // Output the room number
+\end{lstlisting}
+	
+\pause As you see, \texttt{var\_{}dump} shows the class and the properties of the object
+\end{frame}
+
+\begin{frame}[fragile]{Classes and objects - getter and setter}
+	It is a bad pratice to access variables directly. We use getter and setter to access them. \pause
+	\begin{lstlisting}
+<?php
+class House
+{
+  public $rooms = 4; // Class property
+  public $street = "Am Kleinen Anger 13";
+  
+  public function getRooms(){
+  	return $this->rooms; // To refer to the class itself in the class, use $this
+  }
+  
+  public functions setRooms($rooms){
+  	$this->rooms = (int) $rooms; //Validation!
+  }
+}
+
+$h = new House(); //same as "new House;", but this one is better!
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Classes and objects - getter and setter \#{}2}
+	Now we can alter the property "rooms" through it's get and set methods:\pause
+	\begin{lstlisting}
+echo $h->getRooms(); //4
+$h->setRooms(10);
+echo $h->getRooms(); //10
+\end{lstlisting}\pause
+	Furthermore it is no problem to create objects from the same class with different properties/attributes:\pause
+		\begin{lstlisting}
+		$house = new House();
+		$villa = new House();
+		$house->setRooms(5);
+		$villa->setRooms(10);
+		echo $villa->getRooms() . "<br>" 
+		. $house->getRooms();
+		\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{A simple task for the beginning}
+	Are you ready to program some OOP things? Great! \pause
+	
+	Your first task is to create a \textbf{class} of the type "PC". Think about (but not only about): 
+	\begin{itemize}
+	\item PC-Type [Laptop, Tower, Server] \pause
+	\item CPU \pause
+	\item CPU cores \pause
+	\item GPU \pause
+	\item RAM size (in GB) \pause
+	\item OS \pause
+	\end{itemize}
+	
+	Use getter and setter and keep DRY \pause
+	Furthermore, create a \textbf{form} where the user can input those information. Don't forget to validate and sanitize those! \pause
+	
+	\textbf{BONUS:} Use server- and client-side validation ;)
+\end{frame}
+
+\section{Method chaining}
+
+\begin{frame}[fragile]{Method chaining}
+Method chaining is a great concept to reduce your code to a minimum by.. \textbf{chaining methods}. But how does it work? \pause
+\begin{lstlisting}
+class Gameboy {
+  public $battery;
+  public loadPerMinute = 0.08;
+  public drainPerMinute = 0.2;
+
+  public function load($minutes)
+  {
+    $this->battery += $minutes * $this->loadPerMinute; 
+    //Don't use getters/setters inside the class
+ 	if($this->battery > 100) { $this->battery = 100; }
+    return $this; //Important for chaining!
+  }
+  public function play($minutes)
+  {
+    $this-> tank -= $minutes * $this->drainPerMinute;
+    return $this; //Implement validation as in load!
+  }
+  //Getter and setter here ;)
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Method chaining continued}
+Now we can easily find out how much battery is left: \pause
+\begin{lstlisting}
+$gbColor = new Gameboy();
+
+echo $gbColor->load(10*60)->play(140)->getBattery();
+//Load for 10 hours, then play for 140 minutes
+\end{lstlisting} \pause
+\textbf{How it works:} By returning "this" (the object itself) in every method, you can use the return value of each method to issue the next one on the (now altered) object. \pause This does not work for all methods!
+\end{frame}
+
+
+\section{Magic methods}
+
+\begin{frame}[fragile]{Magic methods - General}
+So, you may ask yourselves: What are magic methods? \pause
+Well, they behave a bit like superglobals: You do not need to declare them by yourself and they are available almost everywhere. \pause The difference is, that you can only use them \textbf{in classes}! We will learn more about three more or less important magic methods: \pause
+\begin{itemize}
+	\item \_{}\_{}construct()
+	\item \_{}\_{}destruct()
+	\item \_{}\_{}toString()
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Magic methods - Constructor}
+\begin{lstlisting}
+<?php
+class Person
+{
+  public $name;
+  public $age;
+  public $sex; // bool, true = male
+  
+  //Called on class "construction"
+  //Can be used to set properties
+  public function __construct($name, $age, $sex){
+  	$this->name = $name;
+  	$this->age = $age;
+  	$this->sex = $sex;
+  }
+}
+
+$siegfried = new Person("Siegfried", 35, true);
+$linda = new Person("Linda", 19, false);
+var_dump($siegfried, $linda);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Magic methods - Destructor}
+\begin{lstlisting}
+<?php
+class Destruction {
+   function __construct() {
+       print "We are in the constructor now <br>";
+   }
+
+   function __destruct() {
+       print "Destroying the class now <br>";
+   }
+}
+
+$obj = new Destruction();
+$another = new Destruction();
+unset($another); //Destroys obj.
+echo "EOF";
+?>
+\end{lstlisting}
+
+The destructor is the oposite of the constructor and is executed when the object is destroyed (EOF or unset eg.)
+\end{frame}
+
+\begin{frame}[fragile]{Magic methods - toString}
+\begin{lstlisting}
+<?php
+class Person
+{
+  public $name;
+  public $age;
+  public $sex; // bool, true = male
+  
+  public function __toString(){
+    $sexString = $sex ? "Male" : "Female"; //Ternary operator
+  	return "$name is $age years old and $sexString";
+  }
+}
+
+$randomPerson = new Person(); 
+$randomPerson->name = "Randy";
+$randomPerson->age = 19;
+$randomPerson->sex = true;
+
+echo $randomPerson;
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Your turn again!}
+Alright! You got a new IDE and some more knowledges. Now it's time to prove it\pause
+
+Write a class "Car" that models the car itself (seat count, steering wheel side, type, tank). It should be possible fill the tank and to ride the car. Use method chaining when possible. Print out all important information when you use \texttt{echo \$object} (while \$object has the type Car)
+
+\textbf{Good Luck}
+\end{frame}
+
+\end{document}

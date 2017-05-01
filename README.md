@@ -2,22 +2,21 @@
 
 This repository contains the __PHP Lessons__ sources for the free programming courses, held at the TU Dresden.
 
-Exercises to go along with the courses can be found [on GitHub pages](http://fsr.github.io/php-lessons/) or on the `gh-pages` branch of this repository as Markdown sources.
+## Slides
 
+The ready-to-go slides can be [found here](http://fsr.github.io/php-lessons/materials.html)
+All files are available as `.tex` file in the repository.
 
-### Teaching
+## Exercises
 
-The `tex` files are automatically rendered and can be found at:
-[http://fsr.github.io/php-lessons/materials.html](http://fsr.github.io/php-lessons/materials.html)
+Exercises to go along with the courses can be found in the slides itself or on [on GitHub pages](http://fsr.github.io/php-lessons/).
+All exercices are related to a lesson. The corresponding PDF is linked automatically at the beginning of every task.
 
-Almost every task is linked to a lesson. The corresponding PDF is linked automatically at the beginning of every task.
-
-
-### Contributing
+## Contributing
 
 To add new slides, copy the template to the slides folder:
 ```
-cp latex/actual_slide.tex latex/xx_fancy_name.tex
+cp latex/slides/actual_slide.tex latex/slides/xx_fancy_name.tex
 ```
 
 After you're done, add the name of the file to the `build_conf.json` to enable automatic building (remember to place a `,` on the line before!).

@@ -1,0 +1,243 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 4 - Object Oriented Programming
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{A short recap (again)}
+	We started with OOP last lesson. We know what classes and objects are, can use them properly and include them in our code.\pause
+
+	Today we extend our knowledge about OOP! We learn how to use classes even more efficient and will discover more and more great properties of them.
+\end{frame}
+
+\section{Structuring your code}
+
+\begin{frame}{Code structure}
+	But before we deep-dive into OOP again, we need to talk about \textbf{code structure}. There are some important hints so your code won't become cluttered or messy: \pause
+	
+	\begin{itemize}
+	\item One class per file\pause
+	\item Class requires on top\pause
+	\item Document your methods (more on that later this lesson)\pause
+	\item Care about the visibility of your properties (also in a few minutes!)\pause
+	\item Namespaces (next lesson)\pause
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Code structure - PC Form}
+	A good code structure for you homework would be: \pause
+	\begin{itemize}
+	\item An index file containing the actual form\pause
+	\item A Pc.php file containing the Pc class\pause
+	\item A form.php file that evaluates the form\pause
+	\item Optionally a templates folder with php files containing the html\pause
+	\end{itemize}
+\end{frame}
+
+\section{Magic Constants}
+
+\begin{frame}{Magic Constants}
+	Like magic methods, PHP has also magic constants. They do not need to be declared and are available everywhere:
+	\begin{center}
+		\begin{tabular}{m{2.5cm} | m{5cm}}
+		Constant & Use \\
+		\hline \pause
+		\_{}\_{}LINE\_{}\_{} & Returns current line number of the file \\
+		\hline \pause
+		\_{}\_{}FILE\_{}\_{} & Returns full path of the script file. When used in included file, the path of the included file will be returned\\
+		\hline \pause
+		\_{}\_{}CLASS\_{}\_{} & Provides the class name\\
+		\hline \pause
+		\_{}\_{}FUNCTION\_{}\_{} & Returns the functions name \\
+		\hline \pause
+		\_{}\_{}METHOD\_{}\_{} & Returns the method name\\
+		\hline \pause		
+		\end{tabular}
+	\end{center}
+	
+	Can someone imagine whats the difference between \_{}\_{}FUNCTION\_{}\_{} and \_{}\_{}METHOD\_{}\_{}? \pause Try it out!
+\end{frame}
+
+\begin{frame}[fragile]{Magic Constants - Practical}
+	\begin{lstlisting}
+<?php
+	class ConstantTest {
+	    
+	    function methodTest() {
+	        return __METHOD__;
+	    }
+	    function functionTest(){
+	        return __FUNCTION__;
+	    }
+	 }
+	 
+	 $test = new ConstantTest();
+	 echo $test->methodTest();
+	 echo $test->functionTest();
+	\end{lstlisting}
+	\pause
+	
+	As you see, method returns not only the name of the method, but also the classname!
+\end{frame}
+
+\section{Inheritance}
+
+\begin{frame}{Inheritance - Theory}
+	Inheritance is a great concept of providing functions and variables to other classes without using duplicates. \pause We have a \textbf{parent} and a \textbf{child} class. The child class can use (most of) the parents code. It is useful to setup a general model and then use child classes for specifying different kinds of it.\pause
+	
+	Let's take a look on the potential code!
+\end{frame}
+
+\begin{frame}[fragile]{Inheritance - Theory Code}
+	\begin{lstlisting}
+<?php
+	class ParentClass {
+	  // Code here
+	}
+ 
+	class ChildClass extends ParentClass {
+	  // Some more code here
+	}
+	\end{lstlisting}
+	\pause As you can see we use the \texttt{extends} keyword for specifying Inheritance. \pause Okay, hands on practical stuff now!
+\end{frame}
+
+\begin{frame}[fragile]{Inheritance - Practical}
+	\begin{lstlisting}
+<?php
+    class Car {
+      private $make;
+ 
+      public function setMake($make)
+      {
+        $this->make = $make;
+      }
+  
+      public function __toString()
+      {
+        return "<i> $this->make </i><br />";
+      }
+    }
+    class SportsCar extends Car {} 
+    $car = new SportsCar();
+    $car->setMake('Jaguar');
+  	echo $car;
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Inheritance - Multiple inheritance and more}
+	Keep the last code example in mind, because we will use it in a few minutes again! \pause
+	PHP \textbf{does not} support multiple inheritance, so classes cannot inherit from more than one class. But it is possible that Class C inherits from B and B inherits from A.\pause
+	
+	Also, children can override parent methods! In our last example, the SportsCar class could've used a new toString method. That's no problem at all!\pause
+\end{frame}
+
+\begin{frame}[fragile]{Inheritance - Calling parent methods}
+	As said you can override parent methods within a child class. What you can do too, is calling the parent method from it!
+	\begin{lstlisting}
+<?php
+    class Car {
+      private $make;
+      public function setMake($make)
+      {
+        $this->make = $make;
+      }
+      public function __toString()
+      {
+        return "<i> $this->make </i><br />";
+      }    }
+    class SportsCar extends Car {
+     public function __toString()
+      {
+        return "<b>WOW!</b>".parent::__toString();
+      }    }
+    $car = new SportsCar();
+    $car->setMake('Suzuki');
+  	echo $car; //Returns "WOW! Suzuki"
+	\end{lstlisting}
+\end{frame}
+
+\section{Property visibility and class/method keywords}
+
+\begin{frame}[fragile]{Property visibility}
+	An important part of OOP is the property visiblity. Maybe you wondered why there were words like \texttt{private} or \texttt{public} before the class properties. \pause The reason is quite simple: We only want our getters and setters to change or access the properties from outsite a class (most of the time)!\pause
+	\begin{center}
+		\begin{tabular}{m{2.5cm} | m{5cm}}
+			Visibility level & Description \\
+			\hline \pause	
+			public & The property can be accessed from outside and can be overridden 	\\
+			\hline \pause	
+			protected & The property cannot be accessed from outside and is only visible to the class and subclasses/children classes
+			\\
+			\hline \pause	
+			private & The property can only be accessed by the class itself
+			\\
+			\hline \pause	
+		\end{tabular}
+	\end{center}
+	The good thing is: It works \textbf{the same} with methods (and classes)!\pause
+\end{frame}
+
+\begin{frame}[fragile]{Keywords - final}
+	As we already know, child classes can override their parent class values. So, there should be a way to prevent that, shouldn't it? \pause
+	There is! The \textbf{final} keyword.
+	\begin{lstlisting}
+<?php
+  public final function cantChange();
+    \end{lstlisting}
+    \pause
+    This function can't be changed by child classes!
+    By the way: Keywords work the same for classes, methods and properties (like the visibility)!
+\end{frame}
+
+\begin{frame}[fragile]{Keywords - final}
+	As we already know, child classes can override their parent class values. So, there should be a way to prevent that, shouldn't it? \pause
+	There is! The \textbf{final} keyword.
+	\begin{lstlisting}
+<?php
+  public final function cantChange();
+    \end{lstlisting}
+    \pause
+    This function can't be changed by child classes!
+    By the way: Keywords work the same for classes, methods and properties (like the visibility)!
+\end{frame}
+
+
+\begin{frame}[fragile]{Your turn again}
+	Now you know enough about inheritance and keywords to fulfill another task! \pause Try to sketch how the hierachy on a forum works. We have the following types: User, Moderator, Administrator, Muted. The normal user should be able to write some text (just echo out), the moderator should be able to mute users, the administrator should be able to select new moderators. Whoever is muted cannot write.\pause
+	
+	Try to work out how the best Inheritance strategy is. \pause Do all types need an own class?
+\end{frame}
+
+\section{Abstract classes}
+
+\begin{frame}[fragile]{Keywords - abstract}
+	...
+\end{frame}
+
+\section{PHPDoc blocks}
+
+\section{Autoloading}
+
+
+\end{document}

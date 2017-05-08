@@ -252,11 +252,9 @@ abstract class Person {
     $this->first = $first;
     $this->last = $last;
   }
- 
   public function getName() {
-   return "$this->firstName $this->lastName";
+   return "$this->first $this->last";
   }
-   
   abstract public function displayWelcomeMessage();
 }
 	\end{lstlisting}

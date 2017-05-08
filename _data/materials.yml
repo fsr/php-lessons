@@ -19,3 +19,8 @@ slides:
     name: Object Oriented Programming 1
     url: https://ifsr.de/kurs-materialien/php/04-object-oriented-programming.pdf
     published: True
+  -
+    number: 5
+    name: Object Oriented Programming 2
+    url: https://ifsr.de/kurs-materialien/php/05-object-oriented-programming-two.pdf
+    published: True

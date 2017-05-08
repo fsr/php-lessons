@@ -232,7 +232,36 @@
 \section{Abstract classes}
 
 \begin{frame}[fragile]{Keywords - abstract}
-	...
+	There are also abstract classes and they might appear a bit weird first. You can't instantiate them, which means you cannot create objects out of them!
+	So.. what are they good to?\pause
+	
+	They are used as \textbf{template} for other classes! 
+	
+	You can define abstract methods inside of abstract classes. All of those abstract methods only have a head and no method body. Every of those functions need to be implemented by the child classes. You can add some "normale" functions too, which will be passed like on normal Inheritance
+\end{frame}
+
+\begin{frame}[fragile]{Keywords - abstract - practical}
+	\begin{lstlisting}
+<?php
+abstract class Person {
+ 
+  private $first = ""; 
+  private $last = "";
+ 
+  public function setName($first, $last) {
+    $this->first = $first;
+    $this->last = $last;
+  }
+ 
+  public function getName() {
+   return "$this->firstName $this->lastName";
+  }
+   
+  abstract public function displayWelcomeMessage();
+}
+	\end{lstlisting}
+	\pause
+	Think about our recent task! We could implement a welcome message for each user role (at least for the "User" one)!
 \end{frame}
 
 \section{PHPDoc blocks}

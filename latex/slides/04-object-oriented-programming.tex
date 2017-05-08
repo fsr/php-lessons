@@ -67,7 +67,7 @@ Imagine you want to welcome every user when the opens a page of your website. Yo
 \end{frame}
 
 \begin{frame}[fragile]{Include/Require - Difference and once}
-When the file you want to include couldn't be found, \texttt{include} will throw a warning (but the script continues working. \texttt{Require} would throw a \textbf{fatal error} instead, making the script halt instantly. This is the only differnce \pause
+When the file you want to include couldn't be found, \texttt{include} will throw a warning (but the script continues working). \texttt{Require} would throw a \textbf{fatal error} instead, making the script halt instantly. This is the only difference \pause
 
 That means, \texttt{require} should be used for critical/important files. \pause
 
@@ -174,7 +174,7 @@ echo $h->getRooms(); //10
 	\item OS \pause
 	\end{itemize}
 	
-	Use getter and setter and keep DRY \pause
+	Use getter and setter and keep DRY. \pause
 	Furthermore, create a \textbf{form} where the user can input those information. Don't forget to validate and sanitize those! \pause
 	
 	\textbf{BONUS:} Use server- and client-side validation ;)
@@ -199,7 +199,7 @@ class Gameboy {
   }
   public function play($minutes)
   {
-    $this-> tank -= $minutes * $this->drainPerMinute;
+    $this->batery -= $minutes * $this->drainPerMinute;
     return $this; //Implement validation as in load!
   }
   //Getter and setter here ;)

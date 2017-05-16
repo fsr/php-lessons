@@ -24,3 +24,8 @@ slides:
     name: Object Oriented Programming 2
     url: https://ifsr.de/kurs-materialien/php/05-object-oriented-programming-two.pdf
     published: True
+  -
+    number: 6
+    name: DateTime API and exceptions
+    url: https://ifsr.de/kurs-materialien/php/06-date-time-and-exceptions.pdf
+    published: True

@@ -1,0 +1,258 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 6 - File Handling and stuff
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{A short recap (again)}
+	Now we know a bunch of stuff about OOP. Unfortunately, not all APIs of PHP are available as OOP reference (as we will see later on), but most of them are! \pause
+	Today we will talk about Autoloading, Date and Time objects and finally exceptions. Let's get it on!
+\end{frame}
+
+\section{Autoloading}
+
+\begin{frame}[fragile]{Autoloading - A good way to organize your classes}
+	Including all of your classes at the top of your files can become really annoying. \pause That's why PHP introduced a feature called \textbf{Autoloading} which does the job for you! \pause
+	
+	\begin{lstlisting}
+	
+<?php
+spl_autoload_register(function ($class_name) {
+    require $class_name . '.php';
+});
+
+$obj  = new AnImportantClass();
+$obj2 = new AnotherAutoloadedClass(); 
+
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Date and Time}
+
+\begin{frame}[fragile]{Date and time - nice APIs of PHP}
+While some APIs ain't written well in PHP, the Date/Time API is. It is available as procedural and as OOP code, but we will focus mostly on the OOP one here. \pause
+
+But why we need that API? \pause
+
+\begin{itemize}
+\item Log information with correct timestamps
+\item Transaction dates (financial stuff eg.)
+\item Keep your copyright date up to date :P
+\item And so on..!
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - easy example}
+\begin{lstlisting}
+<?php
+try {
+    $date = new DateTime();
+} catch (Exception $e) {
+    echo $e->getMessage();
+    exit(1);
+}
+//Prints out the current date, formatted as german date string
+echo $date->format('d.m.Y');
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - Extended Use}
+
+You can pass a value to the DateTime class, which is handled as Date that should be  used to construct the object. When you don't set the parameter, the current date will be used. \pause
+
+\begin{lstlisting}
+<?php
+$current = new DateTime();
+$yesterday = new DateTime("2017-05-16");
+$unix = new DateTime('@946684800');
+$b = new DateTime(null, new DateTimeZone('Pacific/Nauru'));
+\end{lstlisting}
+\pause
+You can even set a timezone in which the date should be displayed. Don't forget to set your timezone correctly in your php.ini!
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - Create from format}
+It will happen often that you don't have a date given as timestamp or Y-m-d, but in another format. The API has a method for that one too! \pause
+
+\begin{lstlisting}
+<?php
+$date = DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
+echo $date->format('Y-m-d');
+\end{lstlisting}
+\pause
+If you don't know all of the supported symbols for Date/Time strings, don't worry! I don't know all of them by heart too :D \pause Fortunately there is a list of it in the PHP manual ;)
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - Modify date objects}
+Of course you can modify your objects too. \pause
+
+\begin{lstlisting}
+<?php
+$date = new DateTime();
+echo $date->modify("+2 days")->format('Y-m-d');
+\end{lstlisting}
+\pause
+The cool thing is, that the modify method accepts various inputs. Not only things like "+1 month" or "-2 days", but also "next Tuesday" or "+1 week 4 days 2 hours 50 seconds"
+\end{frame}
+
+
+\begin{frame}[fragile]{Date and time - Difference between two dates}
+When you want to calculate the difference between two date/time objects, you can simply use the diff method to get an interval of it\pause
+
+\begin{lstlisting}
+<?php
+$datetime1 = new DateTime('2009-10-11');
+$datetime2 = new DateTime('2009-10-13');
+$interval = $datetime1->diff($datetime2);
+echo $interval->format('%R%a days');
+\end{lstlisting}
+
+\pause The outpout would be "2 days"
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - DateTimeImmutable}
+There is one common mistake when you use the DateTime API: \pause
+\begin{lstlisting}
+<?php
+function giveMeFridayPlz( DateTime $dt )
+{
+    return $dt->modify('next friday')->format('d.m.Y');
+}
+
+$d = new DateTime();
+echo giveMeFirdayPlz( $d ), "<br>";
+echo $d->format('d.m.Y'), "<br>";
+\end{lstlisting}
+
+This will print out "19.05.2017" twice... \pause
+But \textbf{WHY?}
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - DateTimeImmutable - Why!}
+The reason is that the DateObjects are \textbf{mutable}. That means that the object will be changed the you use the "modify" method on it and will \textbf{not} return a new object. This is intended most of the time, but not in our example. \pause The solution is another class: \emph{DateTimeImmutable}
+\begin{lstlisting}
+<?php
+function giveMeFridayPlz( DateTimeImmutable $dt )
+{
+    return $dt->modify('next friday')->format('d.m.Y');
+}
+
+$d = new DateTimeImmutable();
+echo giveMeFirdayPlz( $d ), "<br>";
+echo $d->format('d.m.Y'), "<br>";
+\end{lstlisting}
+
+This will print out the next Friday as well as the current date.
+\end{frame}
+
+\begin{frame}[fragile]{Date and time - Your turn!}
+
+Your first task for today is separated in a few single ones:
+
+\begin{itemize}
+\item Write a function that displays the difference in days from now to your next birthday (or a date you want to use) \pause
+\item Write another function that returns a date object with the beginning of the next university holiday. \pause
+\item Create a form where a user can enter a date (and the format) and display the weekday of it after evaluating the form
+\end{itemize}
+
+\end{frame}
+
+\section{Exceptions}
+
+\begin{frame}[fragile]{Exceptions - What they do}
+Exceptions are \textbf{the way} to change code behaviour on errors. That means, you can setup special actions that will be taken when an error occurs. \pause
+
+Let's checkout the first example from the Date/Time object chapter:
+
+\begin{lstlisting}
+<?php
+try {
+    $date = new DateTime();
+} catch (Exception $e) {
+    echo $e->getMessage();
+    exit(1);
+}
+//Prints out the current date, formatted as german date string
+echo $date->format('d.m.Y');
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Exceptions - Throw own exceptions}
+
+\begin{lstlisting}
+<?php
+function answerOfLifeAndEverything($number) {
+  if($number!=42) {
+    throw new Exception("Wrong input!");
+  }
+  return true;
+}
+//trigger exception in a "try" block
+try {
+  answerOfLifeAndEverything(2);
+  echo "If you see this, the number is 42";
+} catch(Exception $e) {
+  echo 'Message: ' .$e->getMessage();
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exceptions - Some do's and don'ts}
+
+When using exceptions, especially when communicating between classes, there are some important things you should take care of: \pause
+
+\textbf{DO}
+\begin{itemize}
+\item Create own exceptions (classes that inherit from the "Exception" class \pause
+\item Only use exceptions when an error occurs!\pause
+\item Document your own exceptions\pause
+\end{itemize}
+\textbf{DON'T}\pause
+\begin{itemize}
+\item Use exceptions as "jumps" or conditions\pause
+\item Display raw exception information to the user in production\pause
+\end{itemize}
+\end{frame}
+
+
+\section{What comes next}
+
+\begin{frame}[fragile]{What comes next}
+Before we are starting to work with a framework (\emph{Laravel 5}) later on, we will will go through the following points in the next (2) lessons:
+\begin{itemize}
+\item Sessions \pause
+\item Databases \pause
+\item Dependency management \pause
+\end{itemize}
+
+See you next week
+\end{frame}
+
+\end{document}
+

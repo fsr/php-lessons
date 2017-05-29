@@ -29,3 +29,8 @@ slides:
     name: DateTime API and exceptions
     url: https://ifsr.de/kurs-materialien/php/06-date-time-and-exceptions.pdf
     published: True
+   -
+    number: 7
+    name: File Handling and Dependency management
+    url: https://ifsr.de/kurs-materialien/php/07-file-handling.pdf
+    published: True

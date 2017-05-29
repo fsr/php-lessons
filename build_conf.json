@@ -9,8 +9,9 @@
                 "02-control-flow.tex",
                 "03-processing-forms.tex",
                 "04-object-oriented-programming.tex",
-                "05-object-oriented-programming-two.tex" ,    
-                "06-date-time-and-exceptions.tex"
+                "05-object-oriented-programming-two.tex",    
+                "06-date-time-and-exceptions.tex",
+                "07-file-handling.tex"
             ]
         }
     }

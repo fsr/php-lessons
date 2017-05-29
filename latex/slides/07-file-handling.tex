@@ -1,0 +1,260 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 7 - File Handling and namespaces
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{Another more or less short recap}
+	We have learned to use the OOP DateTime API that PHP provides in the last lesson. Today we will look into an procedural API for handling files (write, read, load, display and so on).
+\end{frame}
+
+\section{File Handling}
+
+\begin{frame}{A warning before!}
+	\textbf{Guys, please be very careful when manipulating files}\pause
+	
+	With little changes to your PHP code, you can cause really huge damage, like changing the wrong file, filling your HDD space or even delete your most important files by accident!
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - Reading a file}
+
+Reading a file in PHP is quite easy. \pause
+\begin{lstlisting}
+<?php
+	readfile("path/to/file.txt");
+\end{lstlisting} \pause
+That's it! But PHP has even more ways to do this. Another easy one is
+\begin{lstlisting}
+<?php
+echo file_get_contents("path/to/file.txt");
+\end{lstlisting} \pause
+
+What could be the difference?\pause
+
+\texttt{readfile()} performs better, because it writes the file directly to the output buffer, while \texttt{file\_get\_contents()} load it into the memory first.
+
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - File resources}
+	Let's check out some more complex situations! Mostly, you don't just want to read a file. You will work with it!\pause
+	
+	\begin{lstlisting}
+<?php
+    $path = "test.txt";
+	$testFile = fopen($path, "r") or die("Unable to open the file");
+	echo fread($myfile,filesize($path));
+	fclose($myfile);
+	\end{lstlisting}\pause
+	What does the code do?\pause
+	
+	It tries to open the file (in read mode) first. When it doesn't exist the script terminates, otherwise it will read parts of the file. Because the length is set to the size of the file, the whole content will be read (and printed out). Then the file handler will be closed. \pause
+
+
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - File handlers!?}
+	So, you may ask yourself now what file handlers are.\pause
+	
+	File handlers are pointers on a resource, which is identified through the file name. This resource (the file) must exist and the user that runs the script needs permission to open the file! Otherwise, the \texttt{fopen()} function will fail!\pause
+	
+	
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - File modes}
+	As you have seen in the first example, \texttt{fopen()} takes an argument that sets the file mode. \textit{r} opens the file in read mode as you already know! Let's check out some other modes\pause
+	
+	\begin{tabular}{p{0.75cm} | p{10cm}}
+		Mode & Description \\
+		\hline \pause
+		'r' & \pause Read-only, cursor at the beginning \pause \\
+		\hline \pause
+		'r+' & \pause Read and write, cursor at the beginning \pause \\
+		\hline \pause
+		'w' & \pause Write-only, cursor at the beginning, file length to 0. When not exist, try to create \pause\\
+		\hline \pause
+		'w+' & \pause Same as 'w', but read-write \pause \\
+		\hline \pause
+		'a' & \pause Write-only, but appends content (cursor at the file end)  \pause \\
+		\hline \pause
+		'a+' & \pause As 'a', but read-write \\
+		\hline
+	\end{tabular}
+	
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - Edit files}
+	Well, we learned how to read a file (partly and completely). Now.. how to write to a file?\pause
+
+\begin{lstlisting}
+<?php
+	$myfile = fopen("newtest.txt", "w") or die("Unable to open file!");
+	$txt = "Das ist ein Test\n";
+	fwrite($myfile, $txt);
+	$txt = "Und noch einer\n";
+	fwrite($myfile, $txt);
+	fclose($myfile);
+\end{lstlisting} \pause
+
+Now our newly created testfile contains two new lines!
+	
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - Edit files again?}
+	But what happens when we write to the file with the same script again to the file?\pause
+	
+	\begin{lstlisting}
+	<?php
+	$myfile = fopen("newtest.txt", "w") or die("Unable to open file!");
+	$txt = "LULULU\n";
+	fwrite($myfile, $txt);
+	$txt = ":(\n";
+	fwrite($myfile, $txt);
+	fclose($myfile);
+	\end{lstlisting} \pause
+	
+	The old lines vanished and now the new input is present in the file. Why? \pause
+	
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - Other protocols}
+	A nice bonus feature of the file handling API is that it can process various protocols too, including HTTP(S)! That means you can pass URLs to the functions too (it may be possible that PHP throws an error then, but that's a security setting in the php config file).
+		\begin{lstlisting}
+	<?php
+	echo file_get_contents("https://developmint.de/");
+	\end{lstlisting} \pause
+	
+\end{frame}
+
+\begin{frame}[fragile]{File Handling - It's your turn again}
+	Okay, now you know enough to fulfill a few tasks!
+	
+	\begin{itemize}
+		\item Write a simple log function that takes a text and a severity level \pause
+		\item Create a file-based chat system! That means that users can submit their chat message through a form. The message should be saved to \textit{one} file. Display the file on the same page! \pause \textbf{Bonus:} Auto-reload the page every 5 seconds
+	\end{itemize}
+	
+\end{frame}
+
+
+
+\section{Namespaces}
+
+\begin{frame}[fragile]{Namespaces - Why}
+		Imagine you have two classes with the same name in your project. \pause
+		\begin{lstlisting}
+	<?php
+		//located in /customClasses/User.php
+		public class User{
+		//....
+		}
+		\end{lstlisting} \pause
+		\begin{lstlisting}
+		
+	<?php
+		//located in /vendor/dependency/User.php
+		public class User{
+		//....
+		}
+		\end{lstlisting} \pause
+		
+		How can PHP distinguish between those classes when you would require them? \pause
+		It cannot! \textbf{With namespaces} PHP can.
+\end{frame}
+
+\begin{frame}[fragile]{Namespaces - How to}
+	Namespacing you class is quite easy. It works like using packages in Java \pause
+	\begin{lstlisting}
+<?php
+	namespace MyNameSpaces/AnotherNameHere;
+	public class User{
+	//....
+	}
+	\end{lstlisting} \pause
+	
+	Now you can import the class:
+	
+	\begin{lstlisting}
+<?php
+	use MyNameSpaces/AnotherNameHere/User;
+	$object = new User();
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Namespaces - Aliases}
+	It can be useful to "alias" namespaces in case you need to import a lot of classes from it.
+	
+	\begin{lstlisting}
+	<?php
+	use MyNameSpaces/AnotherNameHere/ as A;
+	$object = new A\User();	
+	$anotherObject = new A\Helper();
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Namespaces - PSR and Naming}
+	There are some standards called "PSR", aka PHP Standard Recommendations, which are great coding and naming standards for PHP. I suggest you to use them whenever possible. You can find all of them (PSR-0 to PSR-4) on \url{http://www.php-fig.org/psr} \pause
+ 	
+	An example would be the Namespace naming, which should be the same like your folder structure.
+	This leads to easier autoloading and helps you organizing you code better! \pause
+	\begin{lstlisting}
+<?php
+	// {path}/src/YourName/Tools/MyTool.php
+	namespace YourName\Tools;
+	class MyTool {}
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Dependency management}
+
+\begin{frame}[fragile]{Dependency Management}
+	For larger projects, you will mostly rely on packages/code from other people! When your code is built up on their libraries, those libraries/packages are called \textbf{dependencies}.
+	But how to "handle" them properly? \pause
+	
+	\begin{itemize}
+		\item Download them from the respective page! \pause 
+		\textbf{Problem:} Updates?! \pause
+		\item Clone their Git repositories! \pause 
+		\textbf{Problem:} Maintainability \pause
+		\item Don't use dependencies \pause 
+		\textbf{Problem:} So much work, wtf? \pause
+		\item \textbf{Use a dependency manager}!!
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Dependency Management - Composer}
+	The most popular dependency manager is \textit{Composer}. \pause 
+	It is a command line tool that is very powerful and obligatory in almost every project! \pause (There is only \textbf{one} PHP project where I don't use it, but just because the PHP part is around 5\%)
+	
+	Grab you copy on \url{https://getcomposer.org/} and we will install it together! \pause
+	
+	\textbf{Warning:} It might get hairy for Windows users here, but it's possible, so don't worry!
+	
+\end{frame}
+
+
+\end{document}
+

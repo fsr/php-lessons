@@ -34,3 +34,9 @@ slides:
     name: File Handling, namespaces and dependency management
     url: https://ifsr.de/kurs-materialien/php/07-file-handling.pdf
     published: True
+  -
+    number: 8
+    name: Composer and JSON
+    url: https://ifsr.de/kurs-materialien/php/08-composer-and-json.pdf
+    published: True
+

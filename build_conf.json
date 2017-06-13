@@ -12,7 +12,8 @@
                 "05-object-oriented-programming-two.tex",
                 "06-date-time-and-exceptions.tex",
                 "07-file-handling.tex",
-		"08-composer-and-json.tex"
+		"08-composer-and-json.tex",
+		"09-collections.tex"
             ]
         }
     }

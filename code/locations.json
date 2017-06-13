@@ -1,0 +1,402 @@
+[
+   {
+      "users" : 898,
+      "id" : 1,
+      "name" : "Dresden"
+   },
+   {
+      "users" : 817,
+      "id" : 2,
+      "name" : "Köln"
+   },
+   {
+      "id" : 3,
+      "users" : 756,
+      "name" : "Hamburg"
+   },
+   {
+      "users" : 883,
+      "id" : 4,
+      "name" : "Berlin"
+   },
+   {
+      "id" : 5,
+      "users" : 143,
+      "name" : "Münster"
+   },
+   {
+      "name" : "Heidelberg",
+      "users" : 731,
+      "id" : 6
+   },
+   {
+      "name" : "Darmstadt",
+      "id" : 7,
+      "users" : 330
+   },
+   {
+      "id" : 8,
+      "users" : 120,
+      "name" : "Düsseldorf"
+   },
+   {
+      "users" : 314,
+      "id" : 9,
+      "name" : "München"
+   },
+   {
+      "users" : 671,
+      "id" : 10,
+      "name" : "Frankfurt"
+   },
+   {
+      "users" : 290,
+      "id" : 11,
+      "name" : "Karlsruhe"
+   },
+   {
+      "users" : 235,
+      "id" : 12,
+      "name" : "Freiburg"
+   },
+   {
+      "users" : 172,
+      "id" : 13,
+      "name" : "Bonn"
+   },
+   {
+      "users" : 842,
+      "id" : 14,
+      "name" : "Aachen"
+   },
+   {
+      "id" : 15,
+      "users" : 243,
+      "name" : "Augsburg"
+   },
+   {
+      "id" : 16,
+      "users" : 878,
+      "name" : "Aschaffenburg"
+   },
+   {
+      "users" : 530,
+      "id" : 17,
+      "name" : "Bayreuth"
+   },
+   {
+      "users" : 282,
+      "id" : 18,
+      "name" : "Bielefeld"
+   },
+   {
+      "users" : 578,
+      "id" : 19,
+      "name" : "Bochum"
+   },
+   {
+      "name" : "Braunschweig",
+      "id" : 20,
+      "users" : 561
+   },
+   {
+      "id" : 21,
+      "users" : 826,
+      "name" : "Bremen"
+   },
+   {
+      "id" : 22,
+      "users" : 201,
+      "name" : "Chemnitz"
+   },
+   {
+      "users" : 928,
+      "id" : 23,
+      "name" : "Dortmund"
+   },
+   {
+      "users" : 174,
+      "id" : 24,
+      "name" : "Essen"
+   },
+   {
+      "id" : 25,
+      "users" : 294,
+      "name" : "Flensburg"
+   },
+   {
+      "name" : "Fulda",
+      "id" : 26,
+      "users" : 837
+   },
+   {
+      "id" : 27,
+      "users" : 48,
+      "name" : "Hannover"
+   },
+   {
+      "name" : "Heilbronn",
+      "users" : 33,
+      "id" : 28
+   },
+   {
+      "name" : "Jena",
+      "id" : 29,
+      "users" : 602
+   },
+   {
+      "id" : 30,
+      "users" : 777,
+      "name" : "Kaiserslautern"
+   },
+   {
+      "name" : "Kassel",
+      "users" : 695,
+      "id" : 31
+   },
+   {
+      "users" : 500,
+      "id" : 32,
+      "name" : "Kiel"
+   },
+   {
+      "name" : "Koblenz",
+      "id" : 33,
+      "users" : 593
+   },
+   {
+      "users" : 450,
+      "id" : 34,
+      "name" : "Konstanz"
+   },
+   {
+      "users" : 382,
+      "id" : 35,
+      "name" : "Leipzig"
+   },
+   {
+      "name" : "Lübeck",
+      "users" : 727,
+      "id" : 36
+   },
+   {
+      "users" : 181,
+      "id" : 37,
+      "name" : "Ludwigshafen"
+   },
+   {
+      "name" : "Lüneburg",
+      "id" : 38,
+      "users" : 703
+   },
+   {
+      "name" : "Magdeburg",
+      "id" : 39,
+      "users" : 838
+   },
+   {
+      "name" : "Mainz",
+      "id" : 40,
+      "users" : 486
+   },
+   {
+      "users" : 373,
+      "id" : 41,
+      "name" : "Mannheim"
+   },
+   {
+      "users" : 127,
+      "id" : 42,
+      "name" : "Oldenburg"
+   },
+   {
+      "name" : "Osnabrück",
+      "users" : 711,
+      "id" : 43
+   },
+   {
+      "id" : 44,
+      "users" : 536,
+      "name" : "Paderborn"
+   },
+   {
+      "name" : "Ravensburg",
+      "users" : 959,
+      "id" : 45
+   },
+   {
+      "name" : "Regensburg",
+      "id" : 46,
+      "users" : 944
+   },
+   {
+      "id" : 47,
+      "users" : 413,
+      "name" : "Rostock"
+   },
+   {
+      "id" : 48,
+      "users" : 489,
+      "name" : "Stuttgart"
+   },
+   {
+      "users" : 226,
+      "id" : 49,
+      "name" : "Trier"
+   },
+   {
+      "id" : 50,
+      "users" : 982,
+      "name" : "Tübingen"
+   },
+   {
+      "id" : 51,
+      "users" : 49,
+      "name" : "Ulm"
+   },
+   {
+      "users" : 52,
+      "id" : 52,
+      "name" : "Wiesbaden"
+   },
+   {
+      "users" : 182,
+      "id" : 53,
+      "name" : "Wuppertal"
+   },
+   {
+      "users" : 967,
+      "id" : 54,
+      "name" : "Zwickau"
+   },
+   {
+      "id" : 55,
+      "users" : 216,
+      "name" : "Bamberg"
+   },
+   {
+      "id" : 56,
+      "users" : 466,
+      "name" : "Cottbus"
+   },
+   {
+      "users" : 804,
+      "id" : 57,
+      "name" : "Greifswald"
+   },
+   {
+      "name" : "Nürtingen",
+      "users" : 255,
+      "id" : 58
+   },
+   {
+      "name" : "Willhelmshaven",
+      "users" : 489,
+      "id" : 59
+   },
+   {
+      "name" : "Vechta",
+      "id" : 60,
+      "users" : 406
+   },
+   {
+      "name" : "Kempten",
+      "id" : 61,
+      "users" : 32
+   },
+   {
+      "id" : 62,
+      "users" : 183,
+      "name" : "Reutlingen"
+   },
+   {
+      "id" : 63,
+      "users" : 896,
+      "name" : "Halle"
+   },
+   {
+      "users" : 615,
+      "id" : 64,
+      "name" : "Bremerhaven"
+   },
+   {
+      "id" : 65,
+      "users" : 624,
+      "name" : "Clausthal-Zellerfeld"
+   },
+   {
+      "name" : "Hof",
+      "users" : 278,
+      "id" : 66
+   },
+   {
+      "users" : 342,
+      "id" : 67,
+      "name" : "Lingen"
+   },
+   {
+      "name" : "Stralsund",
+      "users" : 795,
+      "id" : 68
+   },
+   {
+      "name" : "Schweinfurt",
+      "users" : 971,
+      "id" : 69
+   },
+   {
+      "name" : "Würzburg",
+      "users" : 179,
+      "id" : 70
+   },
+   {
+      "id" : 71,
+      "users" : 281,
+      "name" : "Merseburg"
+   },
+   {
+      "id" : 72,
+      "users" : 344,
+      "name" : "Rosenheim"
+   },
+   {
+      "name" : "Brandenburg",
+      "id" : 73,
+      "users" : 297
+   },
+   {
+      "users" : 982,
+      "id" : 74,
+      "name" : "Erlangen"
+   },
+   {
+      "users" : 871,
+      "id" : 77,
+      "name" : "Göttingen"
+   },
+   {
+      "users" : 255,
+      "id" : 78,
+      "name" : "Ludwigsburg"
+   },
+   {
+      "id" : 80,
+      "users" : 925,
+      "name" : "Erfurt"
+   },
+   {
+      "users" : 283,
+      "id" : 82,
+      "name" : "Nürnberg"
+   },
+   {
+      "users" : 735,
+      "id" : 83,
+      "name" : "Siegen"
+   },
+   {
+      "name" : "Aalen",
+      "id" : 84,
+      "users" : 150
+   }
+]

@@ -1,0 +1,151 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	% TODO fill in the actual topic
+	PHP-Einführung - Lesson 9 - Collections
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{Recap Recap Recap}
+	In the last lesson, we parsed JSON data to "real" objects and noticed that it's quite tedious and annoying to deal with large datas by just using foreach and some array manipulation methods. \pause Today we want to work with a really cool package called "Collections" which is part of the \textbf{Laravel} framework that we will use in the upcoming lessons!
+\end{frame}
+
+\section{Functional programming}
+
+\begin{frame}{Functional programming}
+	\textit{Whaaat}? Why we talk about \textbf{functional programming} while we are going through PHP? \pause
+	
+	Well, the reason is quite simple: Functional programming comes with really good principles that will help us to write clean and beautiful, as well as performant code! \pause
+	
+	While we are going through the lesson, I recommend to have the collection docs ready. You can find them on \url{https://laravel.com/docs/5.4/collections}
+	
+	I'll mention a lot of methods from the docs, but won't explain all of them on the slides, because the documentation is well-written and always available! 
+\end{frame}
+
+\section{Basic Collection information}
+
+\begin{frame}[fragile]{Creating collections}
+	If you haven't done this yet, use composer to import the \textit{tightenco/collect} package! Also setup your Autoloader as learned before. It might be good to have the \texttt{dd} package ready too! \pause
+	
+	Now we can simply create a collection:	
+	\begin{lstlisting}
+	<?php
+	$newCollection = collect([1, 2, 3]);
+	\end{lstlisting}\pause
+	
+	You can create objects from almost all kind of data types, but you better pass arrays of them in!
+\end{frame}
+
+\begin{frame}[fragile]{Callbacks and passing values}
+	Like array methods, some collection methods will also need a callback function! This works like it does in other languages (JavaScript [very popular], Java lambdas, etc.). Depending on your input, you sometimes only need to provide an index or even nothing. \pause
+	
+	\begin{lstlisting}
+	<?php
+	$newCollection = collect([1, 2, 3]);
+	echo $newCollection->sum(); //Doesn't need a callback
+	
+	echo collect([['foo' => 20], ['foo' => 40]])
+	    ->avg('foo'); //Needs an index 
+	$collection = collect([1, 2, 3, 4, 5]);
+	
+	dd($collection->contains(function ($value, $key) {
+		return $value > 5;
+	})); //Needs callback
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Callbacks - "use"}
+	We don't have an "arrow" syntax like there is on JavaScript (\texttt{() => {doSthHere}}) \pause
+	That's why we still need to give callbacks access to all other variables of the global scope manually!
+	We can use the \textbf{use} keyword for that:\pause
+	
+	\begin{lstlisting}
+	<?php
+	$someCollection->map(function($l) {
+		$unsetArray = [
+		"some",
+		"things",
+		"toDeleteHere",
+		];
+		collect($unsetArray)->each(function ($u) use ($l){
+		
+			unset($l->{$u});
+		});
+		$l->users = rand(10,1000);
+		return $l;
+	})
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Method chaining}
+	Most of the Collection methods (check the docs when in doubt!) are immutable, meaning that every method returns an entirely new Collection instance. That's the reason why you can apply method chaining easily \pause
+	
+	\begin{lstlisting}
+	<?php
+	$collection = collect([3, 7, 13, 2, 199])->map(function ($number) {
+	return $number * 2;
+	})
+	->reject(function ($number) {
+	return $number > 20;
+	});
+	dd($collection);
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Higher order messages}
+	
+	Some of the collection methods support \textit{higher order messages}. That means those methods can be used and accesses as a class property of the collection instance. This provides great shorthands, because you can sometimes avoid callback functions\pause
+	
+	\begin{lstlisting}
+	<?php
+	$sales = [
+		["kind" => "shoe", "revenue" => 3500],
+		["kind" => "skirt", "revenue" => 1232],
+		["kind" => "electronic", "revenue" => 900],
+		["kind" => "sweets", "revenue" => 1512],
+		["kind" => "misc", "revenue" => 642],
+	];
+
+	echo collect($sales)->sum->revenue; //7786
+	\end{lstlisting}
+\end{frame}
+
+\section{Tasks}
+
+\begin{frame}{Tasks}
+	Yeah! Tasks! WOHOO!
+	
+	Write an extra function for each subtask. Use (obviously) collection methods. You can use other packages if you want, but they are not necessary.\pause 
+	\begin{itemize}
+		\item Refactor your code from the last lesson with collections! Try to write your code as beautiful as you can. \pause
+	\end{itemize}
+	Now check out the GitHub repository again. I provided a new JSON file called \texttt{locations.json}. \pause
+	\begin{itemize}
+		\item Show all locations except those with an ID that fulfill: 22 \textless  x \textless= 31 \pause			
+		\item Calculate the total user count of all locations \pause	
+		\item Show all location names that contain an U (case-insensitive) \pause
+		\item Show only every fifth location \pause
+	\end{itemize}
+\end{frame}
+
+
+\end{document}
+

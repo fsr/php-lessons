@@ -14,7 +14,7 @@
                 "07-file-handling.tex",
 		"08-composer-and-json.tex",
 		"09-collections.tex",
-		"10-laravel-introduction.text"
+		"10-laravel-introduction.tex"
             ]
         }
     }

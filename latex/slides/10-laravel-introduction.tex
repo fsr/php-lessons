@@ -1,0 +1,199 @@
+\input{../templates/slides_template}
+\input{../templates/php_info}
+
+% meta-information
+\newcommand{\topic}{
+	PHP-Einführung - Lesson 10 - Laravel Introduction
+}
+
+\title{\topic}
+\date{\today}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Content of this lesson}
+
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+
+\end{frame}
+
+\section{Recap}
+
+\begin{frame}{You know what it is!}
+	After an in-depth lesson about collections, we will begin to work with the most popular (and most awesome) framework that is available for PHP. \pause \textbf{Laravel (5)} \pause
+	
+	Our goal for this lessons will be creating a programming course administration center. I thought it's a bit different to the "basic" stuff everyone does (e.g. a blog or a facebook-clone), and all functions are realistic to implement (which was the problem when programming a Business Software, like a ticket vendor app)
+\end{frame}
+
+\section{Plan the app}
+
+\begin{frame}{Basic concept}
+	So.. before getting into the tech stack, we need a concept for the app... What should it include?\pause
+	\begin{itemize}
+		\item Registration function for tutors and students \pause			
+		\item Tutors should be able to offer courses \pause	
+		\item Students should be able to register for courses \pause
+		\item Course overview \pause			
+		\item Course detail view\pause	
+		\item Administration backend \pause	
+		\item Tutors should be able to send a mail to all course attendees 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Setting up our MVP plans}
+	But what is the \textbf{MVP}?\pause
+	\begin{itemize}
+		\item Registration function for tutors and students \pause			
+		\item Tutors should be able to offer courses \pause	
+		\item \textbf{Students should be able to register for courses} \pause
+		\item \textbf{Course overview} \pause			
+		\item \textbf{Course detail view}\pause	
+		\item Administration backend \pause	
+		\item Tutors should be able to send a mail to all course attendees
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Tech stack}
+	Okay.. we got a rough plan what features our app should deliver. Now the question is, what will we use in our tech stack?
+	\begin{itemize}
+		\item Backend: \pause Laravel 5 (obviously)\pause	
+		\item Frontend: \pause No frontend framework, just jQuery and pure HTML/Blade \pause
+		\item Database: \pause MySQL with ORM (Eloquent) \pause	
+		\item Build tools: \pause Laravel Mix (more later on) \pause
+		\item Cache: \pause File cache, maybe redis later \pause
+		\item Sessions: \pause File/Database \pause		
+		\item Version management: Git (Bitbucket/Github)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Get Started}
+	That was a lot of input. Well, let's see what we can get done today! \pause
+	
+	Our roadmap is simple: First, we will install a fresh copy of \textbf{Laravel}, then we will setup our \textbf{git repo}. After that, we will go through the first steps and components of Laravel. \pause
+	
+	A tip before: Laravel has an excellent documentation at \url{https://laravel.com/docs/master}
+\end{frame}
+
+\section{Setup our environment}
+
+\begin{frame}{Setup environment (1) - Install Laravel}
+	Installing Laravel works only through \textit{Composer}, but fortunately you know how to use that beautiful package manager already.\pause
+	Well, let's install the Laravel installer first. It is mandatory and is used to create new Laravel projects. \pause
+	
+	\texttt{composer global require "laravel/installer"} will setup the installer globally. \pause
+	
+	Now you can simply \texttt{cd} to your XAMPP root folder (htdocs) and then use \texttt{laravel new <name>} to create a new project. \pause
+	I came up with a cool name for our app called "Re\textbf{cours}ive" (\textit{don't steal it! :P}). \pause
+	
+	You can just issue \texttt{laravel new recoursive} to init a new Laravel project. It'll create a new folder named like the entered project name that contains all important Laravel files to start.
+\end{frame}
+
+\begin{frame}{Setup environment (2) - Git Repo?}
+	Before doing anything further with Laravel, we will init a git repo.\pause You can do that by using \texttt{git init} in your project folder. Now create a "cloud repo" on Bitbucket/GitHub and setup the remote origin:\pause
+	
+	\texttt{git remote set-url origin <yoururlhere>}
+	
+	\pause Now create your first commit by adding everything in the project folder by now (except your .idea folder). Gitignore files are already provided by Laravel. 
+\end{frame}
+
+\begin{frame}{Setup environment (3) - Permissions}
+	Good to go? Now setup the permissions of your project root (for the mac/linux users). Set the owner to yourself and the group to the apache server group. You can now give all directories 664 and all files 775. Setting permissions up for the \texttt{storage} and \texttt{bootstrap/cache} folders could be enough. \pause
+	
+	\textbf{DON'T GIVE 777 on production. It'll hit you hard one day because it's a security risk. PLEASE.. DON'T DO IT...}
+\end{frame}
+
+\begin{frame}{Setup environment (4) - env file}
+	After your installation, Laravel copied a standard .env file to your project root. Let's open it now and see what we need to change. \pause
+	You can change the \texttt{APP\_NAME} to our project name. The other APP\_* variables are ideal for local development (debug logs, error information etc.)\pause
+	
+	\textbf{NEVER commit your .env file. It contains important secret information!!} \pause
+	
+	The variables below are for the Database connection and for other connection information, like mail servers, Redis (NoSQL database), Pusher (Frontend Async Event service) and driver settings. We only need to deep-dive into the Database variables!
+\end{frame}
+
+\begin{frame}{Setup environment (5) - Database setup}
+	To save courses, teachers, students and other data, we definitely need a database! Our XAMPP server provides a MySQL database with phpMyAdmin out of the box! Beautiful :) \pause
+	Let's log into phpMyAdmin (\url{localhost/phpmyadmin}) and create a new user called like the project. A good practice is to create an user and a database with the same name. The user should have all privileges for that database then. Let's enter those credentials in the .env file and we are good to go!
+\end{frame}
+
+
+\section{First steps}
+
+\begin{frame}{First Steps (1) - Call it}
+	Alright. To verify that everything works, let's check out the project folder: Go to \texttt{localhost/recoursive/public} and you should see the Laravel frontpage! \pause
+	
+	\textbf{Any problems?} \pause
+	
+	Alright. Now we will see another way to verify that it works! Step into your console again and run PHPUnit by writing \texttt{./vendor/bin/phpunit}. \pause
+	Now, you should see that the "BasicTest"(s) passed and are green. \pause
+	PHPUnit will companion us through our lessons, because we will use the TDD approach here (but better as you already did it in other courses ;P).
+\end{frame}
+
+\begin{frame}{First Steps (2) - An overview}
+	Before changing something in our application, we should get an overview over the folders and their contents. \pause
+	
+	As I do it regularly, I refer to the docs of Laravel: \url{https://laravel.com/docs/master/structure}
+	
+	Take your time to get through it and pose questions if you don't know what terms or explanations mean!
+\end{frame}
+
+\begin{frame}{First Steps (3) - How to start}
+	Now we need a feature that we will start with. Let's check our MVP list again: \pause
+	\begin{itemize}
+		\item \textbf{Students should be able to register for courses} \pause
+		\item \textbf{Course overview} \pause			
+		\item \textbf{Course detail view}\pause	
+	\end{itemize}
+
+	What do you think would be the best thing to start with? \pause
+	
+	I think the \textbf{Course detail view} would be the best. \pause
+	\textbf{Why?} It's required for the overview and the most basic thing of our app
+\end{frame}
+
+\section{Programming concepts}
+
+\begin{frame}{MVC pattern}
+	Laravel (and a lot of other Frameworks) use the "MVC" approach. This simply stands for \textbf{M}odel \textbf{V}iew \textbf{C}ontroller. \pause
+	
+	Each "part" has it's own function: \pause
+	
+	\begin{itemize}
+		\item The \textbf{Models} represent the data of all objects. In our app this will be: \pause Users (Students, Teachers) and Courses \pause		
+		\item The \textbf{Views} display, as the name already hints, the data through HTML \pause
+		\item The \textbf{Controllers} are used for wiring up the data and user requests with our views \pause
+	\end{itemize}
+
+	\textbf{But what's with the Business Logic?!?} \pause
+	
+	The Business Logic is fully decoupled from the MVC pattern. That means it'll have own classes and services.
+\end{frame}
+
+\begin{frame}{TDD}
+	Test-driven development is a often used concept. It means basically that you \textbf{don't write any project code} before writing a test for it. You write the test first, let it fail and then write the least-needed code to let it pass \pause 
+	
+	Many people are biased and think that TDD is a stupid concept because it takes a lot of time (\textit{I was one of them years ago}).\pause 
+	
+	\textbf{BUT IT'S NOT}	\pause
+	
+	TDD is great, because it might take time to build up the app, but you have an automatic test suite that helps you catching ~90\% of the errors that you'd create. Especially if the app is going to be large, you cannot manually test it anymore after code changes. That's why a test-suite is great.\pause
+	
+	 Furthermore, you make up your mind about the code you'll write. It means that your code will have \textbf{a better quality}.\pause
+	 
+	 In the end, TDD projects take \textbf{less time} in comparison to non-TDD projects. They may have a higher "wind-up" time, but way shorter bug-fix times.
+\end{frame}
+
+\section{Prospect}
+
+\begin{frame}{Prospect}
+	In the next lesson we will write our first test, go deeper in the difference of Unit- and Feature-Tests!
+	
+	\textbf{Good luck and see you soon} \pause
+\end{frame}
+
+\end{document}
+

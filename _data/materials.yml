@@ -44,5 +44,10 @@ slides:
     name: Collections
     url: https://ifsr.de/kurs-materialien/php/09-collections.pdf
     published: True
+  -
+    number: 10
+    name: Laravel Introduction
+    url: https://ifsr.de/kurs-materialien/php/10-laravel-introduction.pdf
+    published: True
 
 
